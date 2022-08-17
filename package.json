@@ -2,7 +2,8 @@
   "name": "social-network",
   "version": "1.0.0",
   "description": "Social Network @ Laboratoria",
-  "main": "src/index.html",
+  "main": "src/index.js",
+  "type": "module",
   "keywords": [
     "javascript",
     "firebase",
