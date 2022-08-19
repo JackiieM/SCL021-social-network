@@ -27,35 +27,46 @@
 }
 #contHome{
     width: 100%;
-    top: 5%;   
+    top: 3%;   
 }
 #logoCont{
     text-align: center;
+    margin: 5%;
 }
 .logoHome {
     width: 70%;  
 }
 #loginBtnCont{
-    width: 30%;
+    width: 40%;
     margin: auto;   
 }
 #loginBtn{
     padding: 5px;
     width: 100%;
-    height: 60px;
-    font-size: calc(10px + 1vw);
+    height: 80px;
+    font-size: calc(15px + 1vw);
+    background: var(--basicColor);
+    border: 0;
+    border-radius: 10px;
+    margin: 3%;
+    transition: all .4s ease-in-out;
+}
+#loginBtn:hover {
+    transform: scale(1.2);
 }
 #register{
     padding-top: 2%;
     text-align: center;
     padding-bottom: 3%;
-    color: var(--basicColor)
+    color: var(--basicColor);
+    margin: 3%;
 }
 #icons{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2%;
+    gap: 3%;
+    margin: 5%;
 }
 .contIcon {
     display: flex;
@@ -64,8 +75,11 @@
     height: 20%;
     background: var(--basicColor);
     border-radius: 10px;
-    margin-bottom: 4%;
-
+    margin-bottom: 5%;
+    transition: all .4s ease-in-out;
+}
+.contIcon:hover {
+    transform: scale(1.2);
 }
 .contIcon img{
     padding: 3%;
@@ -73,29 +87,93 @@
     height: 90%;
 }
 #registerBtnCont{
-    width: 30%;
+    width: 55%;
     margin: auto;
 }
 #registerBtn{
     width: 100%;
     height: 80px;
-    font-size: calc(10px + 1vw);
+    font-size: calc(15px + 1vw);
     padding: 5px;
+    background: var(--basicColor);
+    border: 0;
+    border-radius: 10px;
+    margin: 2%;
+    transition: all .4s ease-in-out
 }
 
+#registerBtn:hover {
+    transform: scale(1.2);
+}
+
+#footerGif{
+    margin-top: 5%;
+}
 
 /* small tablet styles */
 @media screen and (min-width: 620px) {
 /* home */
-
+#footerGif {
+        margin-top: 5%;
+        text-align: center;
+    }
 }
 
 /* large tablet & laptop styles */
 @media screen and (min-width: 960px) {
 /* home */
+#footerGif {
+        margin-top: 5%;
+        text-align: center;
+    }
 }
 
 /* desktop styles */
 @media screen and (min-width: 1200px) {
 /* home */
+#logoCont {
+        text-align: center;
+        margin: 0.5%;
+    }
+.logoHome {
+        width: 25%;  
+}
+#loginBtnCont{
+        width: 35%;   
+    }
+#register{
+        padding-top: 1%;
+        padding-bottom: 1%;
+        margin: 0.5%;
+}
+#icons {
+    gap: 1.5%;
+    margin: 1%;
+}
+.contIcon {
+    width: 10%;
+    height: 10%;
+    margin-bottom: 0.5%;
+    margin-top: 0;
+} 
+#registerBtnCont {
+    width: 35%;
+    margin: auto;
+}
+#registerBtn {
+    width: 100%;
+    height: 80px;
+    font-size: calc(15px + 1vw);
+    padding: 5px;
+    background: var(--basicColor);
+    border: 0;
+    border-radius: 10px;
+    margin: 2%;
+    transition: all .4s ease-in-out
+}
+#footerGif {
+    margin-top: 2%;
+    margin-bottom: 1%;
+    text-align: center;
+}
 }
