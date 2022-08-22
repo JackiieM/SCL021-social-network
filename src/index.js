@@ -1,4 +1,9 @@
+//importar funciones
+//import { registerUser } from "./firebase.js"
+//import { initializeApp } from 'firebase/app';
+
 //crear el directorio de rutas que queremos que tenga la web
+import { readURL } from "./functions/functionsAnyMail.js"
 import anyMail  from "./views/any-mail.js"
 import  dash    from "./views/dash.js"
 import  home    from "./views/home.js"
@@ -53,13 +58,26 @@ window.addEventListener("click", e => {
     history.pushState("", "", e.target.href)
     router()
   }
+  //ejecutar funciones importadas
+  //registerUser();
+  readURL()
 })
+
 
 //permite guardar el historial y permite avanzar y retroceder
 window.addEventListener("popstate", router);
 //inicializar en el home
 window.addEventListener("DOMContentLoaded", router)
 
-
+//inicializar firebase
+// const config = {
+//   apiKey: "AIzaSyC8vBCCnI6bXjAa3ZOAVJd5rFv1Doeg3c8",
+//   authDomain: "red-social-ninverse.firebaseapp.com",
+//   projectId: "red-social-ninverse",
+//   storageBucket: "red-social-ninverse.appspot.com",
+//   messagingSenderId: "985322603240",
+//   appId: "1:985322603240:web:2334b8f836fa9a2e5c3f5d"
+// };
+// const app=initializeApp(config);
 
 
