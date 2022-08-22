@@ -1,15 +1,14 @@
 //importar firebase e inicializar los modules de autenticacion y firestore
-import { initializeApp } from 'firebase/app';
-const firebaseConfig = {
-  apiKey: "AIzaSyC8vBCCnI6bXjAa3ZOAVJd5rFv1Doeg3c8",
-  authDomain: "red-social-ninverse.firebaseapp.com",
-  projectId: "red-social-ninverse",
-  storageBucket: "red-social-ninverse.appspot.com",
-  messagingSenderId: "985322603240",
-  appId: "1:985322603240:web:2334b8f836fa9a2e5c3f5d"
-};
-const app = initializeApp(firebaseConfig);
-
+// import { initializeApp } from 'firebase/app';
+// const firebaseConfig = {
+//   apiKey: "AIzaSyC8vBCCnI6bXjAa3ZOAVJd5rFv1Doeg3c8",
+//   authDomain: "red-social-ninverse.firebaseapp.com",
+//   projectId: "red-social-ninverse",
+//   storageBucket: "red-social-ninverse.appspot.com",
+//   messagingSenderId: "985322603240",
+//   appId: "1:985322603240:web:2334b8f836fa9a2e5c3f5d"
+// };
+// const app = initializeApp(firebaseConfig);
 
 //crear el directorio de rutas que queremos que tenga la web
 import anyMail  from "./views/any-mail.js"

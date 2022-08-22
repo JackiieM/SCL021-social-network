@@ -1,7 +1,7 @@
-import functionsAnyMail from "../functions/functionsAnyMail.js"
+/*import functionsAnyMail from "../functions/functionsAnyMail.js"
 
 //hay que ejecutar las funciones exportadas
-functionsAnyMail();
+functionsAnyMail();*/
 
 //exportar contenido de la pagina.
 export default () =>

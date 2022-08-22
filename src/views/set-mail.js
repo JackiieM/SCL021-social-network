@@ -1,7 +1,7 @@
-import functionsSetMail from "../functions/functionsSetMail.js"
+/*import functionsSetMail from "../functions/functionsSetMail.js"
 
 //hay que ejecutar las funciones importadas.
-functionsSetMail();
+functionsSetMail();*/
 
 //exportar contenido de la pagina.
 export default () =>
