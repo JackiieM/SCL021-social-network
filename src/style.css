@@ -110,6 +110,34 @@
     margin-top: 5%;
 }
 
+/* Any Mail */
+#formContent{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    gap: 2%;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+}
+
+.avatar-preview{
+    width: 40%;
+    height: 40%;
+    margin: 2%;
+}
+#display-image{
+    width:100%;
+    height: 100%;
+    background-image: url("./images/default-profile.png");
+}
+
+.formInpt{
+   width: 50%;
+   height: 20%;
+   
+}
+
 /* small tablet styles */
 @media screen and (min-width: 620px) {
 /* home */
