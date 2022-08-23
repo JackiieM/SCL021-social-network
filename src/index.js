@@ -1,5 +1,6 @@
-//crear el directorio de rutas que queremos que tenga la web
+//importar funciones
 import { readURL } from "./functions/functionsAnyMail.js"
+//crear el directorio de rutas que queremos que tenga la web
 import anyMail  from "./views/any-mail.js"
 import  dash    from "./views/dash.js"
 import  home    from "./views/home.js"
