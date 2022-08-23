@@ -1,2 +1,2 @@
-export default () =>
-console.log("estás en welcome")
+// export default () =>
+// console.log("estás en welcome")

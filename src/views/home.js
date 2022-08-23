@@ -1,7 +1,7 @@
-import functionsHome from "../functions/functionsHome.js"
+/*import functionsHome from "../functions/functionsHome.js"
 
 //hay que ejecutar las funciones importadas.
-functionsHome();
+functionsHome(); */
 
 //exportar contenido de la pagina.
 export default () =>

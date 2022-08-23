@@ -1,7 +1,7 @@
-import functionsWelcome from "../functions/functionsWelcome.js"
+/*import functionsWelcome from "../functions/functionsWelcome.js"
 
 //hay que ejecutar las funciones importadas.
-functionsWelcome();
+functionsWelcome();*/
 
 //exportar contenido de la pagina.
 export default () =>

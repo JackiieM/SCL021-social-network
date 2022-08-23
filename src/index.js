@@ -1,7 +1,3 @@
-//importar funciones
-//import { registerUser } from "./firebase.js"
-//import { initializeApp } from 'firebase/app';
-
 //crear el directorio de rutas que queremos que tenga la web
 import { readURL } from "./functions/functionsAnyMail.js"
 import anyMail  from "./views/any-mail.js"

@@ -1,7 +1,7 @@
-import functionsLogIn from "../functions/functionsLogIn.js"
+/*import functionsLogIn from "../functions/functionsLogIn.js"
 
 //hay que ejecutar las funciones importadas.
-functionsLogIn();
+functionsLogIn();*/
 
 //exportar contenido de la pagina.
 export default () =>
