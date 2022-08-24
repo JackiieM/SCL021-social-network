@@ -11,7 +11,7 @@ export default () =>
       <div id="textInputCont">
         <input type="text" id="nickInput" class="formInpt" placeholder="Nickname" value="">   
         <input type="email" id="mailInput" class="formInpt" placeholder="email@mail.com" value="">    
-        <input type="password" id="passInput" class="formInpt" placeholder="******" value="">
+        <input type="password" id="passInput" class="formInpt" placeholder="******" minlength="6" value="">
         <input type="text" id="bioInput" class="formInpt" max="150" placeholder="Sobre ti..." value="">
         <input type="date" id="birthInput" class="formInpt" value="">
         <div class="containerPronouns">
@@ -26,7 +26,7 @@ export default () =>
          <br>
          </div>
         <div class="submitBtn">
-         <button id="submitBtn" type="submit">Aceptar</button>
+        <button id="submitBtn" type="submit">Aceptar</button>
          </div>
         </div>
        </form>

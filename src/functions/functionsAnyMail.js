@@ -3,8 +3,8 @@ function readURL() {
     const imgDiv = document.getElementById('picCont');
     const img = document.getElementById('profilePic');
     const file = document.getElementById('fileUp')
-    const uploadBtn= document.getElementById('uploadBtn')
-
+    const uploadBtn = document.getElementById('uploadBtn')
+   
     //hover por encima del contenedor
     imgDiv.addEventListener('mouseenter', function () {
         uploadBtn.style.display='block'
@@ -27,6 +27,5 @@ function readURL() {
         }
     })
 }
-
 
 export{readURL}

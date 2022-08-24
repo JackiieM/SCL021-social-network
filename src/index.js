@@ -6,7 +6,10 @@ import  dash    from "./views/dash.js"
 import  home    from "./views/home.js"
 import login    from "./views/login.js"
 import setMail  from "./views/set-mail.js"
-import welcome  from "./views/welcome.js"
+import welcome from "./views/welcome.js"
+
+//importar funciones de firebase
+import { newUser } from "./firebase.js"
 
 //diccionario de rutas
 const screenPaths = {
@@ -56,8 +59,8 @@ window.addEventListener("click", e => {
     router()
   }
   //ejecutar funciones importadas
-  //registerUser();
-  readURL()
+  readURL();
+  newUser();
 })
 
 
@@ -66,15 +69,6 @@ window.addEventListener("popstate", router);
 //inicializar en el home
 window.addEventListener("DOMContentLoaded", router)
 
-//inicializar firebase
-// const config = {
-//   apiKey: "AIzaSyC8vBCCnI6bXjAa3ZOAVJd5rFv1Doeg3c8",
-//   authDomain: "red-social-ninverse.firebaseapp.com",
-//   projectId: "red-social-ninverse",
-//   storageBucket: "red-social-ninverse.appspot.com",
-//   messagingSenderId: "985322603240",
-//   appId: "1:985322603240:web:2334b8f836fa9a2e5c3f5d"
-// };
-// const app=initializeApp(config);
+
 
 
