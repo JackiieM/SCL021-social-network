@@ -13,7 +13,7 @@ export default () =>
     <h2 id="loginBtnCont"><a href="/login" data-link><button id="loginBtn">Iniciar sesión</button></a></h2>
     <h2 id="register">Registrarse</h2>
     <div id="icons">
-     <div class="contIcon"><img src="./images/google.png" alt="google"></div>
+     <div class="contIcon" id='google'><img src="./images/google.png" alt="google"></div>
      <div class="contIcon"><img src="./images/apple-logo.png" alt="apple"></div>
      <div class="contIcon"><img src="./images/yahoo.png" alt="yahoo"></div>
      <div class="contIcon"><img src="./images/microsoft.png" alt="microsoft"></div>
