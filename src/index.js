@@ -9,7 +9,7 @@ import setMail  from "./views/set-mail.js"
 import welcome from "./views/welcome.js"
 
 //importar funciones de firebase
-import { newUser } from "./firebase.js"
+import { newUser} from "./firebase.js"
 
 //diccionario de rutas
 const screenPaths = {

@@ -6,7 +6,7 @@ functionsHome(); */
 //exportar contenido de la pagina.
 export default () =>
 `<div id="contHome">
-<header id="logoCont">
+<header id="logoContHome">
     <img class="logoHome" src="./images/logo.gif" alt="logoGrande">
 </header>
   <main>
