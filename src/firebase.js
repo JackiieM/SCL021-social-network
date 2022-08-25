@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification,
   signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
-import {getFirestore,collection, addDoc, getDocs,orderBy,Timestamp,deleteDoc,updateDoc} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
+import {getFirestore, collection, addDoc, getDoc, getDocs,orderBy, Timestamp, deleteDoc, updateDoc, setDoc,query, where,limit} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
 
 // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -16,10 +16,13 @@ import {getFirestore,collection, addDoc, getDocs,orderBy,Timestamp,deleteDoc,upd
 
   // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+//firestore
+const db = getFirestore(app);
   
 //auth
 //const provider = new firebase.auth.GoogleAuthProvider();
 const auth = getAuth();
+
 
 //registrarse con correo electronico
 function newUser(){
@@ -28,12 +31,29 @@ function newUser(){
   event.preventDefault()
     let mailInput = document.getElementById("mailInput").value;
     let passInput = document.getElementById("passInput").value;
+    let nickInput=document.getElementById('nickInput').value
+    let bioInput=document.getElementById('bioInput').value
+    let birthInput = document.getElementById('birthInput').value
+    let chosenPic = document.getElementsByTagName('img')[0].getAttribute('src');
+
+    //iterar a traves de las opciones y rescatar las marcadas.
+    let gender = document.querySelectorAll('.checkInput')  
+    let arrayGender=[]
+    gender.forEach((e) => {
+        if (e.checked==true) {
+          gender = e.value
+          arrayGender.push(gender)
+          console.log(arrayGender)
+        }
+    })
+    
     createUserWithEmailAndPassword(auth, mailInput, passInput)
       .then((userCredential) => {
-        window.location.assign("/welcome")
+       // window.location.assign("/welcome")
         // Signed in
         const user = userCredential.user;
-        // ...
+        const userId = user.uid;
+        newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -63,6 +83,30 @@ function newUser(){
   event.stopImmediatePropagation()})
 }
 
+//insertar en la base de datos
+function newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender){
+    let userData = collection(db, "UsersList");
+    const docUserData = addDoc(
+      userData, {
+        id: userId,
+        Name: nickInput,
+        Description: bioInput,
+        Age: birthInput,
+        Gender: arrayGender,
+        Picture: chosenPic,
+      })
+      .then(() => {
+        console.log('data registrada con éxito')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode)
+        const errorMessage = error.message;
+        console.log(errorMessage)
+     })
+}
+
+
 //login con cualquier correo
 // signInWithEmailAndPassword(auth, email, password)
 //   .then((userCredential) => {
@@ -76,8 +120,7 @@ function newUser(){
 //   });
 
 
-//firestore
-const db = getFirestore(app);
+
 
 
 

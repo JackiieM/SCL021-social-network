@@ -31,7 +31,7 @@
     width: 100%;
     top: 3%;   
 }
-#logoCont{
+#logoContHome{
     text-align: center;
     margin: 5%;
 }
@@ -399,7 +399,7 @@
 /* desktop styles */
 @media screen and (min-width: 1200px) {
 /* home */
-#logoCont {
+#logoContHome {
         text-align: center;
         margin: 0.5%;
     }
