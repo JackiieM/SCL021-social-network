@@ -1,4 +1,3 @@
-//importar funciones
 import { readURL } from "./functions/functionsAnyMail.js"
 //crear el directorio de rutas que queremos que tenga la web
 import anyMail  from "./views/any-mail.js"
@@ -9,7 +8,7 @@ import setMail  from "./views/set-mail.js"
 import welcome from "./views/welcome.js"
 
 //importar funciones de firebase
-import { newUser} from "./firebase.js"
+import { newUser, newGoogleUser } from "./firebase.js"
 
 //diccionario de rutas
 const screenPaths = {
@@ -42,7 +41,6 @@ const screenPaths = {
 // Funcion principal router, permite renderizar las rutas imprimiendo en container.
 function router() {
   let view = screenPaths[location.pathname];
-
   if (view) {
     document.title = view.title;
     document.getElementById('container').innerHTML = view.render();
@@ -58,9 +56,20 @@ window.addEventListener("click", e => {
     history.pushState("", "", e.target.href)
     router()
   }
-  //ejecutar funciones importadas
-  readURL();
-  newUser();
+  //ejecutar funciones importadas según la vista
+
+switch (window.location.pathname) {
+  case "/" :
+    newGoogleUser()
+    break;
+  case "/registerAnyMail":
+    readURL();
+    newUser(); 
+    break;
+  case "/registerSetMail":
+    readURL();
+    break;
+  }
 })
 
 

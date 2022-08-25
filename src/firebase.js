@@ -19,9 +19,9 @@ const app = initializeApp(firebaseConfig);
 //firestore
 const db = getFirestore(app);
   
-//auth
-//const provider = new firebase.auth.GoogleAuthProvider();
+//auth para cualquier correo electrónico y para Google. 
 const auth = getAuth();
+const provider = new GoogleAuthProvider();
 
 
 //registrarse con correo electronico
@@ -29,7 +29,7 @@ function newUser(){
   let botonSubmit = document.getElementById('submitBtn')
   botonSubmit.addEventListener('click', function (event) {
   event.preventDefault()
-    let mailInput = document.getElementById("mailInput").value;
+    let mailInput = ddocument.getElementById("mailInput").value;
     let passInput = document.getElementById("passInput").value;
     let nickInput=document.getElementById('nickInput').value
     let bioInput=document.getElementById('bioInput').value
@@ -83,6 +83,33 @@ function newUser(){
   event.stopImmediatePropagation()})
 }
 
+
+//registrar usuarios con cuenta google
+
+function newGoogleUser() {
+  let googleBtn = document.getElementById("google")
+  googleBtn.addEventListener('click', function (event) {
+    event.preventDefault()
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        const userId = user.uid;
+        window.location.assign("/welcome")
+          newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
+        }).catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode)
+          console.log(error.message)
+          const email = error.customData.email;
+          const credential = GoogleAuthProvider.credentialFromError(error);
+        });
+      })
+  }
+
+
 //insertar en la base de datos
 function newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender){
     let userData = collection(db, "UsersList");
@@ -107,6 +134,8 @@ function newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGe
 }
 
 
+
+
 //login con cualquier correo
 // signInWithEmailAndPassword(auth, email, password)
 //   .then((userCredential) => {
@@ -124,4 +153,4 @@ function newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGe
 
 
 
-export{newUser}
+export{newUser, newGoogleUser}
