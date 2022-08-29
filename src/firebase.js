@@ -29,7 +29,7 @@ function newUser(){
   let botonSubmit = document.getElementById('submitBtn')
   botonSubmit.addEventListener('click', function (event) {
   event.preventDefault()
-    let mailInput = ddocument.getElementById("mailInput").value;
+    let mailInput = document.getElementById("mailInput").value;
     let passInput = document.getElementById("passInput").value;
     let nickInput=document.getElementById('nickInput').value
     let bioInput=document.getElementById('bioInput').value
@@ -49,10 +49,10 @@ function newUser(){
     
     createUserWithEmailAndPassword(auth, mailInput, passInput)
       .then((userCredential) => {
-       // window.location.assign("/welcome")
         // Signed in
         const user = userCredential.user;
         const userId = user.uid;
+        verifyUser();
         newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
       })
       .catch((error) => {
@@ -96,8 +96,7 @@ function newGoogleUser() {
         const token = credential.accessToken;
         const user = result.user;
         const userId = user.uid;
-        window.location.assign("/welcome")
-          newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
+        googleUsers().then(data => { window.location.assign("/welcome") });
         }).catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
@@ -108,7 +107,6 @@ function newGoogleUser() {
         });
       })
   }
-
 
 //insertar en la base de datos
 function newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender){
@@ -133,24 +131,65 @@ function newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGe
      })
 }
 
-
-
-
 //login con cualquier correo
-// signInWithEmailAndPassword(auth, email, password)
-//   .then((userCredential) => {
-//     // Signed in
-//     const user = userCredential.user;
-//     // ...
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//   });
+function logIn() {
+  let loginBtn = document.querySelector('.nextBtn')
+  loginBtn.addEventListener('click', function (event) {
+    event.preventDefault()
+    let mailInput = document.getElementById("mailInput").value;
+    let passInput = document.getElementById("passInput").value;
+    signInWithEmailAndPassword(auth, mailInput, passInput)
+      .then((userCredential) => {
+        window.location.assign("/dash")
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error.code)
+        console.log(error.message)
+        switch (errorCode) {
+           case 'auth/wrong-password':
+            alert('La contraseña es incorrecta')
+            break;
+          case 'auth/user-not-found':
+            alert('El usuario no ha sido encontrado')
+            break;
+          case 'auth/invalid-email':
+            alert('El correo no es válido')
+            break;
+           case 'auth/internal-error':
+            alert('Ingrese la contraseña')
+            break;
+        }
+      });
+  event.stopImmediatePropagation()})
+}
 
+//insertar usuarios de google en la base de datos
+const googleUsers= async()=> {
+  const user = auth.currentUser;
+  console.log(user)
+  if (user !== null) {
+    const docRef = await addDoc(collection(db, 'UsersList'), {
+      id: user.uid,
+      name: user.displayName,
+      picture: user.photoURL,
+    })
+  }
+}
 
+//enviar verificacion por correo
+function verifyUser() {
+ const auth = getAuth();
+sendEmailVerification(auth.currentUser)
+  .then(() => {
+    newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
+    window.location.assign("/welcome");
+    console.log('correo enviado!')
+  });
+}
 
-
-
-
-export{newUser, newGoogleUser}
+export{newUser, newGoogleUser, logIn}

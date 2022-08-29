@@ -8,7 +8,7 @@ import setMail  from "./views/set-mail.js"
 import welcome from "./views/welcome.js"
 
 //importar funciones de firebase
-import { newUser, newGoogleUser } from "./firebase.js"
+import { newUser, newGoogleUser, logIn } from "./firebase.js"
 
 //diccionario de rutas
 const screenPaths = {
@@ -68,6 +68,9 @@ switch (window.location.pathname) {
     break;
   case "/registerSetMail":
     readURL();
+    break;
+  case "/login":
+    logIn();
     break;
   }
 })

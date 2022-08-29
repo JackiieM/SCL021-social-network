@@ -11,7 +11,9 @@ export default () =>
         <p class="welcomeText">Bienvenid@ a </p>
         <div id="logoCont"><img src="./images/logo.gif" alt="logo Niverse"></div>
         <div id="toadCont"><img src="./images/toad-baila.gif" alt="toad"></div>
-        <button id="nextBtn">Continuar</button> 
+        <button id="nextBtn"><a href="/dash" data-link>Continuar a mi Dashboard</a></button>
+        <button id="nextBtn"><a href="/registerSetMail" data-link>Editar mi perfil</a></button> 
+
       </div>
      <div id="charaCont">
         <img id="canelita" src="./images/canelita.png" alt="canelita">

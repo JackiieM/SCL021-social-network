@@ -262,14 +262,20 @@
 #nextBtn {
     margin-top: 2%;
     margin-bottom: 3%;
-    width: 30%;
-    height: 40px;
+    width: 32%;
+    height: 55px;
     font-size: 20px;
     background: var(--highlightColor);
     color: var(--basicColor);
     border: none;
     border-radius: 10px;
 }
+
+a{
+    text-decoration: none;
+    color: var(--basicColor)
+}
+
 #charaCont {
     width: 100%;
     height: 40%;
@@ -316,7 +322,21 @@
     left: 55%;
     top: 35px;
 }
-
+/* Login */
+#loginInputCont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#contPikachu {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+.loginBtn {
+    text-align: center;
+}
 /* small tablet styles */
 @media screen and (min-width: 620px) {
 /* home */
