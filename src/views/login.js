@@ -14,7 +14,7 @@ export default () =>
    </div>
     <h2 id="register">O inicie sesión con una de estas cuentas</h2>
     <div id="icons">
-     <div class="contIcon" id='google'><img src="./images/google.png" alt="google"></div>
+     <div class="contIcon" id='googleLogin'><img src="./images/google.png" alt="google"></div>
      <div class="contIcon"><img src="./images/apple-logo.png" alt="apple"></div>
      <div class="contIcon"><img src="./images/yahoo.png" alt="yahoo"></div>
      <div class="contIcon"><img src="./images/microsoft.png" alt="microsoft"></div>

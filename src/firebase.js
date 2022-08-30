@@ -52,8 +52,8 @@ function newUser(){
         // Signed in
         const user = userCredential.user;
         const userId = user.uid;
-        verifyUser();
         newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
+        sendEmailVerification(auth.currentUser).then(data => { window.location.assign("/welcome") })
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -181,15 +181,27 @@ const googleUsers= async()=> {
   }
 }
 
-//enviar verificacion por correo
-function verifyUser() {
- const auth = getAuth();
-sendEmailVerification(auth.currentUser)
-  .then(() => {
-    newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
-    window.location.assign("/welcome");
-    console.log('correo enviado!')
-  });
+//login con google
+function logInGoogle() {
+  let googleBtn = document.getElementById("googleLogin")
+  googleBtn.addEventListener('click', function (event) {
+    event.preventDefault()
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        const userId = user.uid;
+        window.location.assign("/dash")
+        }).catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode)
+          console.log(error.message)
+          const email = error.customData.email;
+          const credential = GoogleAuthProvider.credentialFromError(error);
+        });
+      })
 }
 
-export{newUser, newGoogleUser, logIn}
+export{newUser, newGoogleUser, logIn, logInGoogle}

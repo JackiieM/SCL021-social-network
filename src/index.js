@@ -8,7 +8,7 @@ import setMail  from "./views/set-mail.js"
 import welcome from "./views/welcome.js"
 
 //importar funciones de firebase
-import { newUser, newGoogleUser, logIn } from "./firebase.js"
+import { newUser, newGoogleUser, logIn, logInGoogle } from "./firebase.js"
 
 //diccionario de rutas
 const screenPaths = {
@@ -56,8 +56,8 @@ window.addEventListener("click", e => {
     history.pushState("", "", e.target.href)
     router()
   }
-  //ejecutar funciones importadas según la vista
 
+  //ejecutar funciones importadas según la vista
 switch (window.location.pathname) {
   case "/" :
     newGoogleUser()
@@ -71,6 +71,7 @@ switch (window.location.pathname) {
     break;
   case "/login":
     logIn();
+    logInGoogle();
     break;
   }
 })
