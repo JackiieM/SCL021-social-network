@@ -53,7 +53,6 @@ function newUser(){
         const user = userCredential.user;
         const userId = user.uid;
         newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
-        sendEmailVerification(auth.currentUser).then(data => { window.location.assign("/welcome") })
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -108,7 +107,7 @@ function newGoogleUser() {
       })
   }
 
-//insertar en la base de datos
+//insertar en la base de datos y que se envie correo de verificacion, y que posteriormente se cargue la vista de bienvenida.
 function newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender){
     let userData = collection(db, "UsersList");
     const docUserData = addDoc(
@@ -122,6 +121,8 @@ function newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGe
       })
       .then(() => {
         console.log('data registrada con éxito')
+        sendEmailVerification(auth.currentUser)
+        window.location.assign("/welcome")
       })
       .catch((error) => {
         const errorCode = error.code;
