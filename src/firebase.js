@@ -172,7 +172,6 @@ function logIn() {
 //insertar usuarios de google en la base de datos
 const googleUsers= async()=> {
   const user = auth.currentUser;
-  console.log(user)
   if (user !== null) {
     const docRef = await addDoc(collection(db, 'UsersList'), {
       id: user.uid,
@@ -205,4 +204,29 @@ function logInGoogle() {
       })
 }
 
-export{newUser, newGoogleUser, logIn, logInGoogle}
+//obtener informacion de un usuario para desplegarla en welcome (nombre) y en dash (nombre y foto)
+
+// function obtainData() {
+//   const user = auth.currentUser;
+//   if (user !== null) {
+//   // The user object has basic properties such as display name, email, etc.
+//   const displayName = user.displayName;
+//   const email = user.email;
+//   const photoURL = user.photoURL;
+//   const emailVerified = user.emailVerified;
+//   const bio = user.bioInput
+//   const gender=user.gender
+
+//   // The user's ID, unique to the Firebase project. Do NOT use
+//   // this value to authenticate with your backend server, if
+//   // you have one. Use User.getToken() instead.
+//   const uid = user.uid;
+// }
+// }
+
+function dataAuth() {
+  const user = auth.currentUser.displayName;
+
+}
+
+export{newUser, newGoogleUser, logIn, logInGoogle, dataAuth}
