@@ -1,4 +1,6 @@
 import { readURL } from "./functions/functionsAnyMail.js"
+import { identifyUser } from "./functions/functionsWelcome.mjs"
+
 //crear el directorio de rutas que queremos que tenga la web
 import anyMail  from "./views/any-mail.js"
 import  dash    from "./views/dash.js"
@@ -8,7 +10,7 @@ import setMail  from "./views/set-mail.js"
 import welcome from "./views/welcome.js"
 
 //importar funciones de firebase
-import { newUser, newGoogleUser, logIn, logInGoogle } from "./firebase.js"
+import { newUser, newGoogleUser, logIn, logInGoogle} from "./firebase.js"
 
 //diccionario de rutas
 const screenPaths = {
@@ -73,6 +75,8 @@ switch (window.location.pathname) {
     logIn();
     logInGoogle();
     break;
+  case "/welcome":
+    identifyUser()
   }
 })
 

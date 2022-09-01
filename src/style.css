@@ -337,6 +337,105 @@ a{
 .loginBtn {
     text-align: center;
 }
+/* ---------------------- dash --------------------------- */
+#dashHeader{
+    width: 100%;
+    display: flex;
+    background: var(--basicColor);
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.dashProfile {
+    width: 20%;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+.logoNi {
+    width: 20%;
+}
+.dots {
+    margin-right: 10px;
+}
+#contenedorPost{
+    width: 85%;
+    height: 150px;
+    background: var(--basicColor);
+    border-radius: 20px;
+    margin: auto;
+    padding: 2%;
+    margin-bottom: 2%;
+}
+#inputPost{
+    width: 100%;
+    height: 75%;
+    border: none;
+    margin-bottom: 1%;
+}
+#bottomPost {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+#iconos {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#postBtn {
+    width: 20%;
+}
+#publishPost{
+    background-color: var(--mainBackground);
+    border-radius: 10px;
+    color: var(--basicColor);
+    width: 100%;
+    height: 30px;
+    border:none;
+}
+#publishedPost {
+    width: 85%;
+    background: var(--basicColor);
+    margin:auto;
+    border-radius: 20px;
+    margin-top:2%;
+}
+#titlePost {
+    width: 100%;
+    background: var(--highlightColor);
+    display: flex;
+    padding: 2%;
+    border-radius: 20px 20px 0px 0px;
+
+}
+#userInfo {
+    width: 70%;
+    display: flex;
+    align-items: center;
+}
+#userInfo p {
+    margin: 2%;
+    color: var(--basicColor);
+    font-size: 18px;
+}
+#postProfilePic{
+    width: 20%;
+    border-radius: 50%;
+}
+#iconsPost{
+    display: flex;
+    height:30px; 
+    align-self: flex-end;
+    width: 30%;
+    gap:5%;
+    justify-content: flex-end;  
+}
+#heart {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2%;
+}
 /* small tablet styles */
 @media screen and (min-width: 620px) {
 /* home */
