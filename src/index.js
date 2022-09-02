@@ -1,6 +1,5 @@
 import { readURL } from "./functions/functionsAnyMail.js"
-import { identifyUser } from "./functions/functionsWelcome.mjs"
-
+import { identifyUser } from "../functions/functionsWelcome.js";
 //crear el directorio de rutas que queremos que tenga la web
 import anyMail  from "./views/any-mail.js"
 import  dash    from "./views/dash.js"
@@ -76,7 +75,8 @@ switch (window.location.pathname) {
     logInGoogle();
     break;
   case "/welcome":
-    identifyUser()
+    identifyUser();
+    break;
   }
 })
 
