@@ -1,8 +1,9 @@
 //importar modulos de firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification,
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification,
   signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
 import {getFirestore, collection, addDoc, getDoc, getDocs,orderBy, Timestamp, deleteDoc, updateDoc, setDoc,query, where,limit} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-storage.js";
 
 // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -23,6 +24,8 @@ const db = getFirestore(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
+//inicializar storage
+const storage = getStorage(app);
 
 //registrarse con correo electronico
 function newUser(){
@@ -34,7 +37,9 @@ function newUser(){
     let nickInput=document.getElementById('nickInput').value
     let bioInput=document.getElementById('bioInput').value
     let birthInput = document.getElementById('birthInput').value
-    let chosenPic = document.getElementsByTagName('img')[0].getAttribute('src');
+    //let chosenPic = document.getElementsByTagName('img')[0].getAttribute('src');
+    let chosenPic = document.getElementById('fileUp').src
+
 
     //iterar a traves de las opciones y rescatar las marcadas.
     let gender = document.querySelectorAll('.checkInput')  
@@ -53,6 +58,14 @@ function newUser(){
         const user = userCredential.user;
         const userId = user.uid;
         newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
+        uploadBytes(chosenPic)
+        updateProfile(auth.currentUser, {
+          displayName: nickInput, photoURL: chosenPic
+        }).then(() => {
+          console.log('perfil creado')
+        }).catch((error) => {
+          console.log(error.message)
+        })
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -121,8 +134,13 @@ function newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGe
       })
       .then(() => {
         console.log('data registrada con éxito')
-        sendEmailVerification(auth.currentUser)
-        window.location.assign("/welcome")
+            .then(() => {
+              console.log('se guardaron los datos')
+              sendEmailVerification(auth.currentUser)
+              window.location.assign("/welcome")
+            })
+              .catch((error) => { console.log(error) });
+
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -224,9 +242,49 @@ function logInGoogle() {
 // }
 // }
 
-function dataAuth() {
-  const user = auth.currentUser.displayName;
+//const profilePicRef = ref(storage, 'profilePictures/' + auth.currentUser.uid + '.jpg');
 
+  // uploadBytes(profilePicRef, chosenPic).then((snapshot) => {
+  //      snapshot.profilePicRef.getStorage().getDownloadURL().then(function(url){
+  //        auth.currentUser.updateProfile({
+  //        displayName: nickInput,
+  //        photoURL: url
+  //      })
+  //       })
+  //     });
+
+function uploadBytes(chosenPic) {
+  const metadata = {contentType: 'image/jpeg'};
+  const storageRef = ref(storage, 'profilePictures/' + chosenPic);
+const uploadTask = uploadBytesResumable(storageRef, chosenPic, metadata);
+// Listen for state changes, errors, and completion of the upload.
+uploadTask.on('state_changed',
+  (snapshot) => {
+    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    console.log('Upload is ' + progress + '% done');
+    switch (snapshot.state) {
+      case 'paused':
+        console.log('Upload is paused');
+        break;
+      case 'running':
+        console.log('Upload is running');
+        break;
+    }
+  },
+  (error) => { console.log(error.message)
+  },
+  
+  () => {
+    // Upload completed successfully, now we can get the download URL
+    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+      console.log('File available at', downloadURL);
+    });
+  }
+);
 }
 
-export{newUser, newGoogleUser, logIn, logInGoogle, dataAuth}
+
+
+
+export{newUser, newGoogleUser, logIn, logInGoogle, auth}

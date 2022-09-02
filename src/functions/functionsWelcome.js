@@ -1,11 +1,12 @@
-// import { dataAuth } from "./firebase.js"
+import { auth } from "../firebase.js"
 
-// console.log(dataAuth)
+function identifyUser() {
+console.log(auth)
+document.getElementById('greeting').innerHTML = `It's a me ${auth.currentUser.displayName}!!!`}setTimeout(identifyUser, 500)
+    
+export { identifyUser }
 
-// function identifyUser() {
-//   window.addEventListener('onload', function () {
-//     document.getElementById('greeting').innerHTML += `It's a me ${auth.currentUser.displayName}!!!`
-//   })
-// }
 
-// export {identifyUser}
+
+
+
