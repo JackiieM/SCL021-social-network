@@ -254,9 +254,18 @@ function logInGoogle() {
   //     });
 
 function uploadBytes(chosenPic) {
+
+const file = document.getElementById('fileUp')
+  file.addEventListener('change', function () {
+    const chosenPic = this.files[0]
+        reader.addEventListener('load', function () {
+            img.setAttribute('src', reader.result)
+        })
+        reader.readAsDataURL(chosenPic)
+})
   const metadata = {contentType: 'image/jpeg'};
   const storageRef = ref(storage, 'profilePictures/' + chosenPic);
-const uploadTask = uploadBytesResumable(storageRef, chosenPic, metadata);
+  const uploadTask = uploadBytesResumable(storageRef, chosenPic, metadata);
 // Listen for state changes, errors, and completion of the upload.
 uploadTask.on('state_changed',
   (snapshot) => {
