@@ -407,7 +407,8 @@ a{
     display: flex;
     padding: 2%;
     border-radius: 20px 20px 0px 0px;
-
+    margin-top: 5%;
+    margin-bottom:5%;
 }
 #userInfo {
     width: 70%;

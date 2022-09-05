@@ -24,24 +24,7 @@ export default () =>
        </div>
      </section>
        <hr>
-     <section id="publishedPost">
-       <div id="titlePost">
-         <div id="userInfo">
-           <img id="postProfilePic" src="./images/default-profile.png" alt="foto de perfil">
-           <p>Nickname</p>
-         </div>
-         <div id="iconsPost">
-     <img src="./images/edit.png" alt="edit">
-     <img src="./images/trash.png" alt="trash">
-         </div>
-       </div>
-       <article>
-         <div>
-           <img id="imagePost" alt="Imagen post">
-           <p id="textPost">Texto Post</p>
-         </div>
-       </article>
-       <div id="heart"> <img src="./images/heart1.png" alt=""></div>
-     </section>`;
+       <section id="publishedPost"> 
+       </section>`;
 
 

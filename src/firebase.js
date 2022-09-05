@@ -37,8 +37,9 @@ function newUser(){
     let nickInput=document.getElementById('nickInput').value
     let bioInput=document.getElementById('bioInput').value
     let birthInput = document.getElementById('birthInput').value
-    //let chosenPic = document.getElementsByTagName('img')[0].getAttribute('src');
-    let chosenPic = document.getElementById('fileUp').src
+    let chosenPic = document.getElementsByTagName('img')[0].getAttribute('src');
+    //let chosenPic = document.getElementById('profilePic').src
+    console.log(chosenPic)
 
 
     //iterar a traves de las opciones y rescatar las marcadas.
@@ -58,10 +59,8 @@ function newUser(){
         const user = userCredential.user;
         const userId = user.uid;
         newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
-        uploadBytes(chosenPic)
-        updateProfile(auth.currentUser, {
-          displayName: nickInput, photoURL: chosenPic
-        }).then(() => {
+        //uploadBytes(chosenPic)
+        updateProfile(auth.currentUser, {displayName: nickInput}).then(() => {
           console.log('perfil creado')
         }).catch((error) => {
           console.log(error.message)
@@ -134,13 +133,8 @@ function newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGe
       })
       .then(() => {
         console.log('data registrada con éxito')
-            .then(() => {
-              console.log('se guardaron los datos')
-              sendEmailVerification(auth.currentUser)
-              window.location.assign("/welcome")
-            })
-              .catch((error) => { console.log(error) });
-
+        sendEmailVerification(auth.currentUser)
+        window.location.assign("/welcome")
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -253,16 +247,8 @@ function logInGoogle() {
   //       })
   //     });
 
-function uploadBytes(chosenPic) {
+/*function uploadBytes(chosenPic) {
 
-const file = document.getElementById('fileUp')
-  file.addEventListener('change', function () {
-    const chosenPic = this.files[0]
-        reader.addEventListener('load', function () {
-            img.setAttribute('src', reader.result)
-        })
-        reader.readAsDataURL(chosenPic)
-})
   const metadata = {contentType: 'image/jpeg'};
   const storageRef = ref(storage, 'profilePictures/' + chosenPic);
   const uploadTask = uploadBytesResumable(storageRef, chosenPic, metadata);
@@ -291,9 +277,89 @@ uploadTask.on('state_changed',
     });
   }
 );
+}*/
+
+function activeUser() {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+});
+  
+}
+
+//hacer posts
+function postData() {
+  document.getElementById('publishPost').addEventListener('click', postUser); 
+  event.preventDefault()
+  function postUser() {
+    let post = document.getElementById('inputPost').value
+    console.log(post)
+    addDoc(collection(db, 'Post'), {
+    uid: auth.currentUser.uid,
+    name: auth.currentUser.displayName,
+    description: post,
+    likes:[],
+    likesCounter: 0,
+    datepost: Timestamp.fromDate(new Date()),
+  });
+
+  event.stopImmediatePropagation()};
+}
+
+async function postDash() {
+  const allPosts = query(collection(db, 'Post'), orderBy('datepost', 'desc'))
+  const querySnapshot = await getDocs(allPosts);
+  let dashHTML = '';
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data());
+    const postWall = doc.data()
+    dashHTML += `
+      <div id="titlePost">
+        <div id="userInfo">
+          <img id="postProfilePic" src="./images/default-profile.png" alt="foto de perfil">
+          <p>${postWall.name}</p>
+        </div>
+        <div id="iconsPost">
+        <img src="./images/edit.png" alt="edit">
+        <img src="./images/trash.png" alt="trash">
+        </div>
+      </div>
+      <article>
+        <div>
+          <p id="textPost">${postWall.description}</p>
+        </div>
+      </article>
+      <div id="heart"> <img src="./images/heart1.png" alt=""></div>`
+  });
+  document.getElementById('publishedPost').innerHTML = dashHTML
 }
 
 
+// function ownerPost() {
+//   if (postWall.uid === auth.currentUser.uid) {
+//         document.getElementById("iconsPost").innerHTML = `    
+//     <img src="./images/edit.png" alt="edit">
+//     <img src="./images/trash.png" alt="trash">`
+//   }
+// }
+ 
+// function ownerPost() {
+//   if (postWall.uid === auth.currentUser.uid) {
+//     document.getElementById('iconsPost').style.display="block"
+//   } else {
+//     document.getElementById('iconsPost').style.display="none"  
+//   }
+// }
+
+        
+  
 
 
-export{newUser, newGoogleUser, logIn, logInGoogle, auth}
+
+
+export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash}
