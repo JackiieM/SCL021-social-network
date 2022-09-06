@@ -299,17 +299,19 @@ function postData() {
   event.preventDefault()
   function postUser() {
     let post = document.getElementById('inputPost').value
-    console.log(post)
+    if (post.length === 0) {
+      alert('No hay nada que publicar!!')
+    } else {
+       console.log(post)
     addDoc(collection(db, 'Post'), {
     uid: auth.currentUser.uid,
     name: auth.currentUser.displayName,
     description: post,
     likes:[],
     likesCounter: 0,
-    datepost: Timestamp.fromDate(new Date()),
+    datepost: Timestamp.fromDate(new Date()), 
   });
-
-  event.stopImmediatePropagation()};
+  }event.stopImmediatePropagation()};
 }
 
 //funcion para recuperar los posts de la base de datos (se activa al hacer click (?))
@@ -378,4 +380,4 @@ function logOut() {
 })
 }
 
-export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut}
+export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword}
