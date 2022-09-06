@@ -3,9 +3,7 @@ export default () =>
      `<header id="dashHeader">
      <img class="dashProfile" src="./images/default-profile.png" alt="Foto de perfil">
      <img class="logoNi" src="./images/logo-mini.gif" alt="logo">
-     <nav>
-       <img class="dots" src="./images/menu-dots.png" alt="puntos">
-     </nav>
+     <button id="logOutButton">Cerrar Sesión</button>
      </header>
        
      <section>
@@ -23,8 +21,8 @@ export default () =>
          </div>
        </div>
      </section>
-       <hr>
-       <section id="publishedPost"> 
-       </section>`;
+     <section id="publishedPostsCont"
+     </section> 
+       `;
 
 

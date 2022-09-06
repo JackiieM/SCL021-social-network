@@ -401,14 +401,13 @@ a{
     border-radius: 20px;
     margin-top:2%;
 }
+
 #titlePost {
     width: 100%;
     background: var(--highlightColor);
     display: flex;
     padding: 2%;
     border-radius: 20px 20px 0px 0px;
-    margin-top: 5%;
-    margin-bottom:5%;
 }
 #userInfo {
     width: 70%;
@@ -432,10 +431,26 @@ a{
     gap:5%;
     justify-content: flex-end;  
 }
+#textPost {
+    padding: 3%;
+    font-size: 17px;
+}
 #heart {
     display: flex;
     justify-content: flex-end;
     padding: 2%;
+}
+#publishedPostsCont {
+    margin-bottom: 5%;
+}
+#logOutButton{
+    background-color: var(--mainBackground);
+    border-radius: 10px;
+    color: var(--basicColor);
+    width: 18%;
+    height: 30px;
+    border: none;
+    margin-right: 2%;
 }
 /* small tablet styles */
 @media screen and (min-width: 620px) {
