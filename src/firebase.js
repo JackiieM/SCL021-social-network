@@ -154,6 +154,7 @@ function logIn() {
     signInWithEmailAndPassword(auth, mailInput, passInput)
       .then((userCredential) => {
         window.location.assign("/dash")
+
         // Signed in
         const user = userCredential.user;
         // ...
@@ -311,14 +312,17 @@ function postData() {
   event.stopImmediatePropagation()};
 }
 
-async function postDash() {
-  const allPosts = query(collection(db, 'Post'), orderBy('datepost', 'desc'))
-  const querySnapshot = await getDocs(allPosts);
-  let dashHTML = '';
-  querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
-    const postWall = doc.data()
-    dashHTML += `
+//funcion para recuperar los posts de la base de datos (se activa al hacer click (?))
+ async function postDash() {
+    const allPosts = query(collection(db, 'Post'), orderBy('datepost', 'desc'));
+    const querySnapshot =  await getDocs(allPosts);
+    let dashHTML = '';
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+      const postWall = doc.data()
+      if (postWall.uid === auth.currentUser.uid) {
+        dashHTML += `
+    <section id="publishedPost">
       <div id="titlePost">
         <div id="userInfo">
           <img id="postProfilePic" src="./images/default-profile.png" alt="foto de perfil">
@@ -334,32 +338,44 @@ async function postDash() {
           <p id="textPost">${postWall.description}</p>
         </div>
       </article>
-      <div id="heart"> <img src="./images/heart1.png" alt=""></div>`
-  });
-  document.getElementById('publishedPost').innerHTML = dashHTML
+      <div id="heart"> <img src="./images/heart1.png" alt="">
+      </div>
+    </section>`
+      } else {
+        dashHTML += `
+      <section id="publishedPost">
+        <div id="titlePost">
+          <div id="userInfo">
+            <img id="postProfilePic" src="./images/default-profile.png" alt="foto de perfil">
+            <p>${postWall.name}</p>
+          </div>
+          <div id="iconsPost">
+          </div>
+        </div>
+        <article>
+          <div>
+            <p id="textPost">${postWall.description}</p>
+          </div>
+        </article>
+        <div id="heart"> <img src="./images/heart1.png" alt="">
+        </div>
+      </section>`
+      }
+      document.getElementById('publishedPostsCont').innerHTML = dashHTML
+    })
+ };
+
+
+//cerrar sesion
+function logOut() {
+  document.getElementById('logOutButton').addEventListener('click', function(){
+  signOut(auth).then(() => {
+  // Sign-out successful.
+  window.location.assign("/")
+}).catch((error) => {
+  console.log(error.message)
+});     
+})
 }
 
-
-// function ownerPost() {
-//   if (postWall.uid === auth.currentUser.uid) {
-//         document.getElementById("iconsPost").innerHTML = `    
-//     <img src="./images/edit.png" alt="edit">
-//     <img src="./images/trash.png" alt="trash">`
-//   }
-// }
- 
-// function ownerPost() {
-//   if (postWall.uid === auth.currentUser.uid) {
-//     document.getElementById('iconsPost').style.display="block"
-//   } else {
-//     document.getElementById('iconsPost').style.display="none"  
-//   }
-// }
-
-        
-  
-
-
-
-
-export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash}
+export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut}
