@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification,
   signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
-import {getFirestore, collection, addDoc, getDoc, getDocs,orderBy, Timestamp, deleteDoc, updateDoc, setDoc,query, where,limit} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
+import {getFirestore, collection, addDoc, getDoc, getDocs,orderBy, Timestamp, deleteDoc, updateDoc, setDoc,query, where,limit, doc, FieldValue} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-storage.js";
 
 // Your web app's Firebase configuration
@@ -59,7 +59,7 @@ function newUser(){
         const user = userCredential.user;
         const userId = user.uid;
         newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
-        //uploadBytes(chosenPic)
+        uploadBytes(chosenPic)
         updateProfile(auth.currentUser, {displayName: nickInput}).then(() => {
           console.log('perfil creado')
         }).catch((error) => {
@@ -248,37 +248,36 @@ function logInGoogle() {
   //       })
   //     });
 
-/*function uploadBytes(chosenPic) {
-
-  const metadata = {contentType: 'image/jpeg'};
-  const storageRef = ref(storage, 'profilePictures/' + chosenPic);
-  const uploadTask = uploadBytesResumable(storageRef, chosenPic, metadata);
-// Listen for state changes, errors, and completion of the upload.
-uploadTask.on('state_changed',
-  (snapshot) => {
-    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    console.log('Upload is ' + progress + '% done');
-    switch (snapshot.state) {
-      case 'paused':
-        console.log('Upload is paused');
-        break;
-      case 'running':
-        console.log('Upload is running');
-        break;
-    }
-  },
-  (error) => { console.log(error.message)
-  },
+// function uploadBytes(chosenPic) {
+//   const metadata = {contentType: 'image/jpeg'};
+//   const storageRef = ref(storage, 'profilePictures/' + chosenPic);
+//   const uploadTask = uploadBytesResumable(storageRef, chosenPic, metadata);
+// // Listen for state changes, errors, and completion of the upload.
+// uploadTask.on('state_changed',
+//   (snapshot) => {
+//     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+//     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//     console.log('Upload is ' + progress + '% done');
+//     switch (snapshot.state) {
+//       case 'paused':
+//         console.log('Upload is paused');
+//         break;
+//       case 'running':
+//         console.log('Upload is running');
+//         break;
+//     }
+//   },
+//   (error) => { console.log(error.message)
+//   },
   
-  () => {
-    // Upload completed successfully, now we can get the download URL
-    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-      console.log('File available at', downloadURL);
-    });
-  }
-);
-}*/
+//   () => {
+//     // Upload completed successfully, now we can get the download URL
+//     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+//       console.log('File available at', downloadURL);
+//     });
+//   }
+// );
+// }
 
 function activeUser() {
   onAuthStateChanged(auth, (user) => {
@@ -368,8 +367,18 @@ function postData() {
       </section>`
       }
       document.getElementById('publishedPostsCont').innerHTML = dashHTML
+      likesCounter()
     })
- };
+};
+ 
+function likesCounter() {
+  document.querySelector('#heart').addEventListener('click', async (uid) => {
+    const heartLikes = db.collection('Post').set(uid)
+    await heartLikes.update({
+      likesCounter: FieldValue.increment(1)
+    })
+  })
+}setTimeout(likesCounter,500)
 
 
 //cerrar sesion
@@ -384,4 +393,4 @@ function logOut() {
 })
 }
 
-export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword}
+export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword, likesCounter}

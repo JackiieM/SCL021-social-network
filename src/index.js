@@ -10,7 +10,7 @@ import setMail  from "./views/set-mail.js"
 import welcome from "./views/welcome.js"
 
 //importar funciones de firebase
-import { newUser, newGoogleUser, logIn, logInGoogle, postData, postDash, logOut} from "./firebase.js"
+import { newUser, newGoogleUser, logIn, logInGoogle, postData, postDash, logOut, likesCounter} from "./firebase.js"
 
 //diccionario de rutas
 const screenPaths = {
@@ -83,6 +83,7 @@ switch (window.location.pathname) {
     postDash();
     logOut();
     printProfilePic();
+    likesCounter();
     break;
   }
 })
