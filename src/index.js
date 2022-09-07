@@ -1,5 +1,6 @@
 import { readURL } from "./functions/functionsAnyMail.js"
 import { identifyUser } from "../functions/functionsWelcome.js";
+import { printProfilePic } from "./functions/functionsDash.js";
 //crear el directorio de rutas que queremos que tenga la web
 import anyMail  from "./views/any-mail.js"
 import  dash    from "./views/dash.js"
@@ -81,6 +82,7 @@ switch (window.location.pathname) {
     postData();
     postDash();
     logOut();
+    printProfilePic();
     break;
   }
 })
