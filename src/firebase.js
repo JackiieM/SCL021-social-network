@@ -306,11 +306,15 @@ function postData() {
     addDoc(collection(db, 'Post'), {
     uid: auth.currentUser.uid,
     name: auth.currentUser.displayName,
+    picture: auth.currentUser.photoURL,
     description: post,
     likes:[],
     likesCounter: 0,
     datepost: Timestamp.fromDate(new Date()), 
-  });
+    });
+      postDash()
+      document.getElementById('inputPost').value = '';
+
   }event.stopImmediatePropagation()};
 }
 
@@ -327,7 +331,7 @@ function postData() {
     <section id="publishedPost">
       <div id="titlePost">
         <div id="userInfo">
-          <img id="postProfilePic" src="./images/default-profile.png" alt="foto de perfil">
+          <img id="postProfilePic" src=${postWall.picture} alt="foto de perfil">
           <p>${postWall.name}</p>
         </div>
         <div id="iconsPost">
@@ -348,7 +352,7 @@ function postData() {
       <section id="publishedPost">
         <div id="titlePost">
           <div id="userInfo">
-            <img id="postProfilePic" src="./images/default-profile.png" alt="foto de perfil">
+            <img id="postProfilePic" src="${postWall.picture}" alt="foto de perfil">
             <p>${postWall.name}</p>
           </div>
           <div id="iconsPost">

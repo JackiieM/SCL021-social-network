@@ -8,13 +8,13 @@ import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWith
   signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
 
 //probar autenticacion
-jest.mock("https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js", () => {
-  return {
-    auth: jest.fn().mockReturnThis(),
-    logIn: jest.fn(),
-  };
-})
-describe('')
+// jest.mock("https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js", () => {
+//   return {
+//     auth: jest.fn().mockReturnThis(),
+//     logIn: jest.fn(),
+//   };
+// })
+// describe('')
 
 
 
