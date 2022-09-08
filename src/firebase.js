@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification,
   signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
-import {getFirestore, collection, addDoc, getDoc, getDocs,orderBy, Timestamp, deleteDoc, updateDoc, setDoc,query, where,limit, doc, FieldValue} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
+import {getFirestore, collection, addDoc, getDoc, getDocs,orderBy, Timestamp, deleteDoc, updateDoc, setDoc,query, where,limit, doc, FieldValue, increment, arrayUnion, arrayRemove} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-storage.js";
 
 // Your web app's Firebase configuration
@@ -301,7 +301,6 @@ function postData() {
     if (post.length === 0) {
       alert('No hay nada que publicar!!')
     } else {
-       console.log(post)
     addDoc(collection(db, 'Post'), {
     uid: auth.currentUser.uid,
     name: auth.currentUser.displayName,
@@ -313,7 +312,6 @@ function postData() {
     });
       postDash()
       document.getElementById('inputPost').value = '';
-
   }event.stopImmediatePropagation()};
 }
 
@@ -334,8 +332,8 @@ function postData() {
           <p>${postWall.name}</p>
         </div>
         <div id="iconsPost">
-        <img src="./images/edit.png" alt="edit">
-        <img src="./images/trash.png" alt="trash">
+        <img id="edit" src="./images/edit.png" alt="edit">
+        <img id="trash" src="./images/trash.png" alt="trash">
         </div>
       </div>
       <article>
@@ -343,7 +341,7 @@ function postData() {
           <p id="textPost">${postWall.description}</p>
         </div>
       </article>
-      <div id="heart"> <img src="./images/heart1.png" alt="">
+      <div id="heart" data-id="${doc.id}"> <img src="./images/heart1.png" alt="">
       </div>
     </section>`
       } else {
@@ -362,23 +360,39 @@ function postData() {
             <p id="textPost">${postWall.description}</p>
           </div>
         </article>
-        <div id="heart"> <img src="./images/heart1.png" alt="">
+        <div id="heart"><img src="./images/heart1.png" alt="">
         </div>
       </section>`
       }
       document.getElementById('publishedPostsCont').innerHTML = dashHTML
-      likesCounter()
+      deletePost(doc.id)
+      console.log(doc.id)
+      document.querySelector('#heart').addEventListener('click', ()=> likesCounter(postId))
     })
 };
  
-function likesCounter() {
-  document.querySelector('#heart').addEventListener('click', async (uid) => {
-    const heartLikes = db.collection('Post').set(uid)
-    await heartLikes.update({
-      likesCounter: FieldValue.increment(1)
-    })
+// async function likesCounter(id) {
+//   const heartLikes = db.collection('Post').set(id)
+//   await heartLikes.update({
+//     likesCounter: FieldValue.increment(1)
+//   })
+// }
+
+async function likesCounter(postId) {
+  
+  const heartLikes = doc(db, 'Post', postId)
+    await updateDoc(heartLikes, {
+    likesCounter: likesCounter+1
   })
-}setTimeout(likesCounter,500)
+  console.log(heartLikes)
+}
+
+//eliminar post
+function deletePost() {
+  document.querySelector('#trash').addEventListener('click', async () => {
+    await deleteDoc(doc(db, "Post", doc.id))
+  })
+}
 
 
 //cerrar sesion
@@ -393,4 +407,4 @@ function logOut() {
 })
 }
 
-export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword, likesCounter}
+export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword, deletePost}
