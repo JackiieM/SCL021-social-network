@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification,
   signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js"
-import {getFirestore, collection, addDoc, getDoc, getDocs,orderBy, Timestamp, deleteDoc, updateDoc, setDoc,query, where,limit} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
+import {getFirestore, collection, addDoc, getDoc, getDocs,orderBy, Timestamp, deleteDoc, updateDoc, setDoc,query, where,limit, doc, FieldValue, increment, arrayUnion, arrayRemove} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js"
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-storage.js";
 
 // Your web app's Firebase configuration
@@ -59,7 +59,7 @@ function newUser(){
         const user = userCredential.user;
         const userId = user.uid;
         newUserData(userId, nickInput, bioInput, birthInput, chosenPic, arrayGender)
-        //uploadBytes(chosenPic)
+        uploadBytes(chosenPic)
         updateProfile(auth.currentUser, {displayName: nickInput}).then(() => {
           console.log('perfil creado')
         }).catch((error) => {
@@ -248,37 +248,36 @@ function logInGoogle() {
   //       })
   //     });
 
-/*function uploadBytes(chosenPic) {
-
-  const metadata = {contentType: 'image/jpeg'};
-  const storageRef = ref(storage, 'profilePictures/' + chosenPic);
-  const uploadTask = uploadBytesResumable(storageRef, chosenPic, metadata);
-// Listen for state changes, errors, and completion of the upload.
-uploadTask.on('state_changed',
-  (snapshot) => {
-    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    console.log('Upload is ' + progress + '% done');
-    switch (snapshot.state) {
-      case 'paused':
-        console.log('Upload is paused');
-        break;
-      case 'running':
-        console.log('Upload is running');
-        break;
-    }
-  },
-  (error) => { console.log(error.message)
-  },
+// function uploadBytes(chosenPic) {
+//   const metadata = {contentType: 'image/jpeg'};
+//   const storageRef = ref(storage, 'profilePictures/' + chosenPic);
+//   const uploadTask = uploadBytesResumable(storageRef, chosenPic, metadata);
+// // Listen for state changes, errors, and completion of the upload.
+// uploadTask.on('state_changed',
+//   (snapshot) => {
+//     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+//     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//     console.log('Upload is ' + progress + '% done');
+//     switch (snapshot.state) {
+//       case 'paused':
+//         console.log('Upload is paused');
+//         break;
+//       case 'running':
+//         console.log('Upload is running');
+//         break;
+//     }
+//   },
+//   (error) => { console.log(error.message)
+//   },
   
-  () => {
-    // Upload completed successfully, now we can get the download URL
-    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-      console.log('File available at', downloadURL);
-    });
-  }
-);
-}*/
+//   () => {
+//     // Upload completed successfully, now we can get the download URL
+//     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+//       console.log('File available at', downloadURL);
+//     });
+//   }
+// );
+// }
 
 function activeUser() {
   onAuthStateChanged(auth, (user) => {
@@ -302,7 +301,6 @@ function postData() {
     if (post.length === 0) {
       alert('No hay nada que publicar!!')
     } else {
-       console.log(post)
     addDoc(collection(db, 'Post'), {
     uid: auth.currentUser.uid,
     name: auth.currentUser.displayName,
@@ -314,7 +312,6 @@ function postData() {
     });
       postDash()
       document.getElementById('inputPost').value = '';
-
   }event.stopImmediatePropagation()};
 }
 
@@ -335,8 +332,8 @@ function postData() {
           <p>${postWall.name}</p>
         </div>
         <div id="iconsPost">
-        <img src="./images/edit.png" alt="edit">
-        <img src="./images/trash.png" alt="trash">
+        <img id="edit" src="./images/edit.png" alt="edit">
+        <img id="trash" src="./images/trash.png" alt="trash">
         </div>
       </div>
       <article>
@@ -344,7 +341,7 @@ function postData() {
           <p id="textPost">${postWall.description}</p>
         </div>
       </article>
-      <div id="heart"> <img src="./images/heart1.png" alt="">
+      <div id="heart" data-id="${doc.id}"> <img src="./images/heart1.png" alt="">
       </div>
     </section>`
       } else {
@@ -363,13 +360,39 @@ function postData() {
             <p id="textPost">${postWall.description}</p>
           </div>
         </article>
-        <div id="heart"> <img src="./images/heart1.png" alt="">
+        <div id="heart"><img src="./images/heart1.png" alt="">
         </div>
       </section>`
       }
       document.getElementById('publishedPostsCont').innerHTML = dashHTML
+      deletePost(doc.id)
+      console.log(doc.id)
+      document.querySelector('#heart').addEventListener('click', ()=> likesCounter(postId))
     })
- };
+};
+ 
+// async function likesCounter(id) {
+//   const heartLikes = db.collection('Post').set(id)
+//   await heartLikes.update({
+//     likesCounter: FieldValue.increment(1)
+//   })
+// }
+
+async function likesCounter(postId) {
+  
+  const heartLikes = doc(db, 'Post', postId)
+    await updateDoc(heartLikes, {
+    likesCounter: likesCounter+1
+  })
+  console.log(heartLikes)
+}
+
+//eliminar post
+function deletePost() {
+  document.querySelector('#trash').addEventListener('click', async () => {
+    await deleteDoc(doc(db, "Post", doc.id))
+  })
+}
 
 
 //cerrar sesion
@@ -384,4 +407,4 @@ function logOut() {
 })
 }
 
-export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword}
+export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword, deletePost}
