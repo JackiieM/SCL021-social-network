@@ -10,7 +10,7 @@ import setMail  from "./views/set-mail.js"
 import welcome from "./views/welcome.js"
 
 //importar funciones de firebase
-import { newUser, newGoogleUser, logIn, logInGoogle, postData, postDash, logOut, deletePost} from "./firebase.js"
+import { newUser, newGoogleUser, logIn, logInGoogle, postData, postDash, logOut, auth, deletePost, likes} from "./firebase.js"
 
 //diccionario de rutas
 const screenPaths = {
@@ -78,17 +78,77 @@ switch (window.location.pathname) {
   case "/welcome":
     identifyUser();
     break;
-   case "/dash":
+  case "/dash":
     postData();
-    postDash();
+    postDash().then((postArray) => {
+      console.log(postArray)
+      let dashHTML = "";
+      postArray.forEach(postWall => {
+
+        if (postWall.uid === auth.currentUser.uid) {
+          dashHTML += `
+      <section id="publishedPost">
+        <div id="titlePost">
+          <div id="userInfo">
+            <img id="postProfilePic" src=${postWall.picture} alt="foto de perfil">
+            <p>${postWall.name}</p>
+          </div>
+          <div id="iconsPost">
+          <img id="edit" src="./images/edit.png" alt="edit">
+          <img id="trash" src="./images/trash.png" alt="trash" data-id='${postWall.id}'>
+          </div>
+        </div>
+        <article>
+          <div>
+            <p id="textPost">${postWall.description}</p>
+          </div>
+        </article>
+        <div id="heart" data-id='${postWall.id}'><img src="./images/heart1.png" alt="" >
+        </div>
+      </section>`
+        } else {
+          dashHTML += `
+        <section id="publishedPost">
+          <div id="titlePost">
+            <div id="userInfo">
+              <img id="postProfilePic" src="${postWall.picture}" alt="foto de perfil">
+              <p>${postWall.name}</p>
+            </div>
+            <div id="iconsPost">
+            </div>
+          </div>
+          <article>
+            <div>
+              <p id="textPost">${postWall.description}</p>
+            </div>
+          </article>
+          <div id="heart" data-id='${postWall.id}'><img src="./images/heart1.png" alt="">
+          </div>
+        </section>`
+        }
+      })
+      document.getElementById('publishedPostsCont').innerHTML = dashHTML
+      
+      //Eliminar post
+        document.querySelectorAll('#trash').forEach(element=>element.addEventListener('click', (e) => {
+          let id = e.target.dataset.id
+          if (confirm("Quieres borrar el post?") == true) {
+            deletePost(id)
+          }          
+        }))
+      //editar
+
+      //like
+      document.querySelectorAll('#heart').forEach(element=>element.addEventListener('click', (e) => {
+        let like = e.target.dataset.id 
+        likes(like)
+      }))
+    })
     logOut();
     printProfilePic();
-    deletePost();
     break;
   }
 })
-
-
 //permite guardar el historial y permite avanzar y retroceder
 window.addEventListener("popstate", router);
 //inicializar en el home

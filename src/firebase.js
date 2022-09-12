@@ -217,68 +217,6 @@ function logInGoogle() {
       })
 }
 
-//obtener informacion de un usuario para desplegarla en welcome (nombre) y en dash (nombre y foto)
-
-// function obtainData() {
-//   const user = auth.currentUser;
-//   if (user !== null) {
-//   // The user object has basic properties such as display name, email, etc.
-//   const displayName = user.displayName;
-//   const email = user.email;
-//   const photoURL = user.photoURL;
-//   const emailVerified = user.emailVerified;
-//   const bio = user.bioInput
-//   const gender=user.gender
-
-//   // The user's ID, unique to the Firebase project. Do NOT use
-//   // this value to authenticate with your backend server, if
-//   // you have one. Use User.getToken() instead.
-//   const uid = user.uid;
-// }
-// }
-
-//const profilePicRef = ref(storage, 'profilePictures/' + auth.currentUser.uid + '.jpg');
-
-  // uploadBytes(profilePicRef, chosenPic).then((snapshot) => {
-  //      snapshot.profilePicRef.getStorage().getDownloadURL().then(function(url){
-  //        auth.currentUser.updateProfile({
-  //        displayName: nickInput,
-  //        photoURL: url
-  //      })
-  //       })
-  //     });
-
-// function uploadBytes(chosenPic) {
-//   const metadata = {contentType: 'image/jpeg'};
-//   const storageRef = ref(storage, 'profilePictures/' + chosenPic);
-//   const uploadTask = uploadBytesResumable(storageRef, chosenPic, metadata);
-// // Listen for state changes, errors, and completion of the upload.
-// uploadTask.on('state_changed',
-//   (snapshot) => {
-//     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-//     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-//     console.log('Upload is ' + progress + '% done');
-//     switch (snapshot.state) {
-//       case 'paused':
-//         console.log('Upload is paused');
-//         break;
-//       case 'running':
-//         console.log('Upload is running');
-//         break;
-//     }
-//   },
-//   (error) => { console.log(error.message)
-//   },
-  
-//   () => {
-//     // Upload completed successfully, now we can get the download URL
-//     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-//       console.log('File available at', downloadURL);
-//     });
-//   }
-// );
-// }
-
 function activeUser() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -288,8 +226,7 @@ function activeUser() {
     // User is signed out
     // ...
   }
-});
-  
+}); 
 }
 
 //hacer posts
@@ -310,89 +247,53 @@ function postData() {
     likesCounter: 0,
     datepost: Timestamp.fromDate(new Date()), 
     });
-      postDash()
       document.getElementById('inputPost').value = '';
   }event.stopImmediatePropagation()};
 }
 
 //funcion para recuperar los posts de la base de datos (se activa al hacer click (?))
  async function postDash() {
+    const allPostsData = [];
     const allPosts = query(collection(db, 'Post'), orderBy('datepost', 'desc'));
     const querySnapshot =  await getDocs(allPosts);
-    let dashHTML = '';
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-      const postWall = doc.data()
-      if (postWall.uid === auth.currentUser.uid) {
-        dashHTML += `
-    <section id="publishedPost">
-      <div id="titlePost">
-        <div id="userInfo">
-          <img id="postProfilePic" src=${postWall.picture} alt="foto de perfil">
-          <p>${postWall.name}</p>
-        </div>
-        <div id="iconsPost">
-        <img id="edit" src="./images/edit.png" alt="edit">
-        <img id="trash" src="./images/trash.png" alt="trash">
-        </div>
-      </div>
-      <article>
-        <div>
-          <p id="textPost">${postWall.description}</p>
-        </div>
-      </article>
-      <div id="heart" data-id="${doc.id}"> <img src="./images/heart1.png" alt="">
-      </div>
-    </section>`
-      } else {
-        dashHTML += `
-      <section id="publishedPost">
-        <div id="titlePost">
-          <div id="userInfo">
-            <img id="postProfilePic" src="${postWall.picture}" alt="foto de perfil">
-            <p>${postWall.name}</p>
-          </div>
-          <div id="iconsPost">
-          </div>
-        </div>
-        <article>
-          <div>
-            <p id="textPost">${postWall.description}</p>
-          </div>
-        </article>
-        <div id="heart"><img src="./images/heart1.png" alt="">
-        </div>
-      </section>`
-      }
-      document.getElementById('publishedPostsCont').innerHTML = dashHTML
-      deletePost(doc.id)
+      allPostsData.push({...doc.data(), id: doc.id});
       console.log(doc.id)
-      document.querySelector('#heart').addEventListener('click', ()=> likesCounter(postId))
     })
+   console.log(allPostsData);
+   //eliminar post
+    return allPostsData;
 };
  
+//dar likes
 // async function likesCounter(id) {
-//   const heartLikes = db.collection('Post').set(id)
+//   const heartLikes = (doc(db.collection('Post').set(id)))
 //   await heartLikes.update({
 //     likesCounter: FieldValue.increment(1)
 //   })
 // }
 
-async function likesCounter(postId) {
-  
-  const heartLikes = doc(db, 'Post', postId)
+//dar likes
+async function likes(id) {
+  const heartLikes = doc(db, 'Post', id)
+  const updateLike = await getDoc(heartLikes)
+  const postData = updateLike.data()
+  const likesCount=postData.likesCounter
+    
+  if (postData.likes.includes(id)) {
     await updateDoc(heartLikes, {
-    likesCounter: likesCounter+1
+    likes:arrayUnion(id),
+    likesCounter:likesCount+1
   })
-  console.log(heartLikes)
+}
 }
 
-//eliminar post
-function deletePost() {
-  document.querySelector('#trash').addEventListener('click', async () => {
-    await deleteDoc(doc(db, "Post", doc.id))
-  })
+//funcion borrar
+function deletePost(id) {
+   deleteDoc(doc(db, "Post", id))
 }
+
+//funcion editar
 
 
 //cerrar sesion
@@ -407,4 +308,4 @@ function logOut() {
 })
 }
 
-export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword, deletePost}
+export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword, deletePost, likes}
