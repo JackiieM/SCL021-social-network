@@ -10,7 +10,7 @@ import setMail  from "./views/set-mail.js"
 import welcome from "./views/welcome.js"
 
 //importar funciones de firebase
-import { newUser, newGoogleUser, logIn, logInGoogle, postData, postDash, logOut, auth, deletePost, likes} from "./firebase.js"
+import { newUser, newGoogleUser, logIn, logInGoogle, postData, postDash, logOut, auth, deletePost, likes, editPosts} from "./firebase.js"
 
 //diccionario de rutas
 const screenPaths = {
@@ -99,11 +99,19 @@ switch (window.location.pathname) {
           </div>
         </div>
         <article>
-          <div>
+          <div class="hide">
             <p id="textPost">${postWall.description}</p>
           </div>
+          <div id="editPost">
+            <input id="editInput" type="text" value='${postWall.description}'>
+            <div id="editBtns">
+              <button class="buttonEdit" type='button'>Cancelar</button>
+              <button class="buttonEdit" type='button'>Guardar</button>
+            </div>
+          </div>
         </article>
-        <div id="heart" data-id='${postWall.id}'><img src="./images/heart1.png" alt="" >
+        <div id="heart" class="hide"><img id="liked" data-idlikes='${postWall.id}' src="./images/heart1.png" alt="" >
+        <p id="likesTotal">${postWall.likesCounter}</p>
         </div>
       </section>`
         } else {
@@ -122,7 +130,8 @@ switch (window.location.pathname) {
               <p id="textPost">${postWall.description}</p>
             </div>
           </article>
-          <div id="heart" data-id='${postWall.id}'><img src="./images/heart1.png" alt="">
+          <div id="heart"><img id="liked" data-idlikes='${postWall.id}' src="./images/heart1.png" alt="">
+          <p id="likesTotal">${postWall.likesCounter}</p>
           </div>
         </section>`
         }
@@ -132,16 +141,27 @@ switch (window.location.pathname) {
       //Eliminar post
         document.querySelectorAll('#trash').forEach(element=>element.addEventListener('click', (e) => {
           let id = e.target.dataset.id
+          console.log(id)
           if (confirm("Quieres borrar el post?") == true) {
             deletePost(id)
           }          
         }))
       //editar
+      document.querySelectorAll('#edit').forEach(element => element.addEventListener('click', (event) => { 
+        event.preventDefault()
+        let selectedPost = event.target
+        document.getElementById('editPost').style.display="block"
 
-      //like
-      document.querySelectorAll('#heart').forEach(element=>element.addEventListener('click', (e) => {
-        let like = e.target.dataset.id 
-        likes(like)
+      //editPosts()
+      event.stopImmediatePropagation()}))
+
+      //funcionalidad para dar like 
+      document.querySelectorAll('#liked').forEach(element=>element.addEventListener('click', (e) => {
+        let like = e.target.dataset.idlikes 
+        let selectedPost = e.target
+        console.log(like)
+        selectedPost.setAttribute("src", "./images/heart2.png")
+        likes(like, auth.currentUser.uid)
       }))
     })
     logOut();
