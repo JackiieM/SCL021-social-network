@@ -438,7 +438,35 @@ a{
 #heart {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 1%;
     padding: 2%;
+}
+#editPost {
+    display: none;   
+}
+#editInput {
+    text-align: center;
+    margin: 2%;
+    padding: 3%;
+    width: 95%;
+    height: 80%;
+    font-size: 16px;
+    border-radius: 20px;
+}
+#editBtns{
+    display: flex;
+    justify-content: center;
+    gap:2%;
+}
+.buttonEdit{
+    width: 20%;
+    height: 100%;
+    background: var(--mainBackground);
+    color: var(--basicColor);
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
 }
 #publishedPostsCont {
     margin-bottom: 5%;

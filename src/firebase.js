@@ -94,9 +94,7 @@ function newUser(){
   event.stopImmediatePropagation()})
 }
 
-
 //registrar usuarios con cuenta google
-
 function newGoogleUser() {
   let googleBtn = document.getElementById("google")
   googleBtn.addEventListener('click', function (event) {
@@ -221,7 +219,7 @@ function activeUser() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid;
-    // ...
+    // ...si existe usuario logueado, que nos derive a la vista con las funciones cargadas.
   } else {
     // User is signed out
     // ...
@@ -265,28 +263,23 @@ function postData() {
     return allPostsData;
 };
  
-//dar likes
-// async function likesCounter(id) {
-//   const heartLikes = (doc(db.collection('Post').set(id)))
-//   await heartLikes.update({
-//     likesCounter: FieldValue.increment(1)
-//   })
-// }
-
-//dar likes
-async function likes(id) {
-  const heartLikes = doc(db, 'Post', id)
-  const updateLike = await getDoc(heartLikes)
-  const postData = updateLike.data()
-  const likesCount=postData.likesCounter
-    
-  if (postData.likes.includes(id)) {
-    await updateDoc(heartLikes, {
-    likes:arrayUnion(id),
-    likesCounter:likesCount+1
+//dar likes y quitar likes 
+async function likes(id, user) {
+  const postRef = doc(db, 'Post', id)
+  const docsData = await getDoc(postRef)
+  const allData = docsData.data()
+  if (allData.likes.includes(user)) {
+    await updateDoc(postRef, {
+      likes: arrayRemove(user),
+      likesCounter: increment(-1)
+    })
+  } else {
+    await updateDoc(postRef, {
+    likes: arrayUnion(user),
+    likesCounter: increment(1)
   })
-}
-}
+  }
+} 
 
 //funcion borrar
 function deletePost(id) {
@@ -294,7 +287,13 @@ function deletePost(id) {
 }
 
 //funcion editar
-
+async function editPosts(id, input) {
+const postEdit = doc(db, "Post", id);
+// Set the "capital" field of the city 'DC'
+await updateDoc(postEdit, {
+  description: input
+});
+}
 
 //cerrar sesion
 function logOut() {
@@ -308,4 +307,4 @@ function logOut() {
 })
 }
 
-export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword, deletePost, likes}
+export{newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword, deletePost, likes, editPosts}
