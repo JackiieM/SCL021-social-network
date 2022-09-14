@@ -289,11 +289,11 @@ function deletePost(id) {
 //funcion editar
 async function editPosts(id, input) {
 const postEdit = doc(db, "Post", id);
-// Set the "capital" field of the city 'DC'
 await updateDoc(postEdit, {
   description: input
-});
-}
+  })
+};
+
 
 //cerrar sesion
 function logOut() {

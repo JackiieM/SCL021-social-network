@@ -1,4 +1,5 @@
 //funcion para recoger datos del formulario
+
 function readURL() {
     const imgDiv = document.getElementById('picCont');
     const img = document.getElementById('profilePic');

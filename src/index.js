@@ -94,7 +94,7 @@ switch (window.location.pathname) {
             <p>${postWall.name}</p>
           </div>
           <div id="iconsPost">
-          <img id="edit" src="./images/edit.png" alt="edit">
+          <img class="edit" src="./images/edit.png" alt="edit" data-idedit='${postWall.id}'>
           <img id="trash" src="./images/trash.png" alt="trash" data-id='${postWall.id}'>
           </div>
         </div>
@@ -102,12 +102,12 @@ switch (window.location.pathname) {
           <div class="hide">
             <p id="textPost">${postWall.description}</p>
           </div>
-          <div id="editPost">
+          <dialog id="editPost">
             <input id="editInput" type="text" value='${postWall.description}'>
             <div id="editBtns">
-              <button class="buttonEdit" type='button'>Cancelar</button>
-              <button class="buttonEdit" type='button'>Guardar</button>
-            </div>
+              <button class="buttonEdit" id="cancelar" type='button'>Cancelar</button>
+              <button class="buttonEdit" id="guardar" type='button'>Guardar</button>
+            </dialog>
           </div>
         </article>
         <div id="heart" class="hide"><img id="liked" data-idlikes='${postWall.id}' src="./images/heart1.png" alt="" >
@@ -139,22 +139,27 @@ switch (window.location.pathname) {
       document.getElementById('publishedPostsCont').innerHTML = dashHTML
       
       //Eliminar post
-        document.querySelectorAll('#trash').forEach(element=>element.addEventListener('click', (e) => {
-          let id = e.target.dataset.id
-          console.log(id)
-          if (confirm("Quieres borrar el post?") == true) {
-            deletePost(id)
-          }          
-        }))
+      document.querySelectorAll('#trash').forEach(element => element.addEventListener('click', (e) => {
+        let id = e.target.dataset.id
+        console.log(id)
+        if (confirm("Quieres borrar el post?") == true) {
+          deletePost(id)
+        }
+      }))
       //editar
-      document.querySelectorAll('#edit').forEach(element => element.addEventListener('click', (event) => { 
-        event.preventDefault()
-        let selectedPost = event.target
-        document.getElementById('editPost').style.display="block"
-
-      //editPosts()
-      event.stopImmediatePropagation()}))
-
+      document.querySelectorAll('.edit').forEach(element => element.addEventListener('click', (event) => {
+        let targetPost = event.target
+        document.getElementById('editPost').showModal()
+        let selectedPost = event.target.dataset.idedit
+        console.log(selectedPost)
+        document.querySelectorAll('#guardar').forEach(element => element.addEventListener('click', function() {
+          let inputMsg = document.getElementById("editInput").value
+          editPosts(selectedPost, inputMsg)
+          console.log(inputMsg)
+      }))
+        event.stopImmediatePropagation()
+      }))
+    
       //funcionalidad para dar like 
       document.querySelectorAll('#liked').forEach(element=>element.addEventListener('click', (e) => {
         let like = e.target.dataset.idlikes 

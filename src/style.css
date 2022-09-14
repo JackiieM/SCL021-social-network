@@ -443,7 +443,8 @@ a{
     padding: 2%;
 }
 #editPost {
-    display: none;   
+    width: 300px;
+    height: 200px;
 }
 #editInput {
     text-align: center;
