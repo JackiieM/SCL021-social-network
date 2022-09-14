@@ -1,6 +1,6 @@
-//exportar contenido de la pagina.
-export default () =>
-`<div id="contHome">
+/* eslint-disable */
+// exportar contenido de la pagina.
+export default () => `<div id="contHome">
 <header id="logoContHome">
     <img class="logoHome" src="./images/logo.gif" alt="logoGrande">
 </header>
@@ -24,7 +24,4 @@ export default () =>
     </div>
     </main>
   </div>`;
-
-
-
-
+/* eslint-enable */

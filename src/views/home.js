@@ -1,11 +1,11 @@
-/*import functionsHome from "../functions/functionsHome.js"
+/* eslint-disable */
+/* import functionsHome from "../functions/functionsHome.js"
 
-//hay que ejecutar las funciones importadas.
+hay que ejecutar las funciones importadas.
 functionsHome(); */
 
-//exportar contenido de la pagina.
-export default () =>
-`<div id="contHome">
+// exportar contenido de la pagina.
+export default () => `<div id="contHome">
 <header id="logoContHome">
     <img class="logoHome" src="./images/logo.gif" alt="logoGrande">
 </header>
@@ -24,5 +24,4 @@ export default () =>
      <div id="footerGif"><img src="./images/nGames.gif" alt="nintendo games"></div>
   </footer>
   </div>`;
-
-
+/* eslint-enable */

@@ -1,6 +1,6 @@
-//exportar contenido de la pagina.
-export default () =>
-     `<header id="dashHeader">
+/* eslint-disable */
+// exportar contenido de la pagina.
+export default () => `<header id="dashHeader">
      <img class="dashProfile" src="" alt="Foto de perfil">
      <img class="logoNi" src="./images/logo-mini.gif" alt="logo">
      <button id="logOutButton">Cerrar Sesión</button>
@@ -24,5 +24,4 @@ export default () =>
      <section id="publishedPostsCont"
      </section> 
        `;
-
-
+/* eslint-enable */
