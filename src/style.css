@@ -1,22 +1,24 @@
+/* eslint-disable */
 /* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Jockey+One&display=swap');
 
 /* variables */
-:root{
-    --mainBackground:  #FF0000;
+:root {
+    --mainBackground: #FF0000;
     --highlightColor: #4D4A4A;
     --basicColor: #FEFEFE;
     --lightBackground: #E1E1E1;
 }
 
 /* reset */
-* { 
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'Jockey One', sans-serif;
 }
+
 /* base styles */
 
 
@@ -25,24 +27,29 @@
 /* home */
 .home {
     background: var(--mainBackground);
-    
+
 }
-#contHome{
+
+#contHome {
     width: 100%;
-    top: 3%;   
+    top: 3%;
 }
-#logoContHome{
+
+#logoContHome {
     text-align: center;
     margin: 5%;
 }
+
 .logoHome {
-    width: 70%;  
+    width: 70%;
 }
-#loginBtnCont{
+
+#loginBtnCont {
     width: 40%;
-    margin: auto;   
+    margin: auto;
 }
-#loginBtn{
+
+#loginBtn {
     padding: 5px;
     width: 100%;
     height: 80px;
@@ -53,23 +60,27 @@
     margin: 3%;
     transition: all .4s ease-in-out;
 }
+
 #loginBtn:hover {
     transform: scale(1.2);
 }
-#register{
+
+#register {
     padding-top: 2%;
     text-align: center;
     padding-bottom: 3%;
     color: var(--basicColor);
     margin: 3%;
 }
-#icons{
+
+#icons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 3%;
     margin: 5%;
 }
+
 .contIcon {
     display: flex;
     justify-content: center;
@@ -80,19 +91,23 @@
     margin-bottom: 5%;
     transition: all .4s ease-in-out;
 }
+
 .contIcon:hover {
     transform: scale(1.2);
 }
-.contIcon img{
+
+.contIcon img {
     padding: 3%;
     width: 80%;
     height: 90%;
 }
-#registerBtnCont{
+
+#registerBtnCont {
     width: 55%;
     margin: auto;
 }
-#registerBtn{
+
+#registerBtn {
     width: 100%;
     height: 80px;
     font-size: calc(15px + 1vw);
@@ -108,42 +123,47 @@
     transform: scale(1.2);
 }
 
-#footerGif{
+#footerGif {
     margin-top: 5%;
 }
 
 /* Any Mail */
-#titleRegister{
+#titleRegister {
     color: var(--basicColor);
-    text-align:center;
+    text-align: center;
     padding-bottom: 3%;
     padding-top: 2%;
-    font-size:18px;
+    font-size: 18px;
 }
-#formContent{
+
+#formContent {
     width: 100%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-items: center;
     align-content: center;
     align-items: center;
 }
-#picCont{
+
+#picCont {
     width: 60%;
     height: 35%;
     position: absolute;
     box-shadow: 2px 2px 12px 4px darkred;
     border-radius: 20%;
 }
-#profilePic{
+
+#profilePic {
     width: 100%;
     height: 100%;
     border-radius: 20%;
 }
-#fileUp{
+
+#fileUp {
     display: none;
 }
-#uploadBtn{
+
+#uploadBtn {
     width: 50px;
     height: 50px;
     background-image: url("./images/lapiz.gif");
@@ -155,11 +175,13 @@
     bottom: 50%;
     top: 90%;
 }
+
 #textInputCont {
-    position:absolute;
+    position: absolute;
     top: 50%;
     text-align: center;
 }
+
 #proCont {
     position: absolute;
     top: 100%;
@@ -168,7 +190,8 @@
     color: var(--basicColor);
     margin-top: 4%;
 }
-::placeholder{
+
+::placeholder {
     font-size: 20px;
 }
 
@@ -184,27 +207,31 @@
     text-align: center;
     font-size: 20px;
 }
-.containerPronouns h3{
+
+.containerPronouns h3 {
     color: var(--highlightColor);
 }
 
-.formInpt{
-   width: 70%;
-   height: 50px;
-   margin: 8px 0;
-   border: none;
-   border-radius: 15px;
-   padding: 10px;
-   font-size: 20px;
+.formInpt {
+    width: 70%;
+    height: 50px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 20px;
 }
+
 .checkInput {
-   width: 15px;
-   height: 15px;
+    width: 15px;
+    height: 15px;
 }
-.checkInputText{
+
+.checkInputText {
     font-size: 18px;
 }
-.submitBtn{
+
+.submitBtn {
     padding-bottom: 4%;
     position: absolute;
     top: 140%;
@@ -214,7 +241,7 @@
     border: none;
 }
 
-#submitBtn{
+#submitBtn {
     width: 100%;
     height: 100%;
     background: var(--highlightColor);
@@ -226,39 +253,43 @@
 }
 
 /* Welcome */
-.welcomeText{
+.welcomeText {
     font-size: 20px;
     color: var(--highlightColor);
-    margin-top:3%;
+    margin-top: 3%;
 }
 
-#welcomeCont{
+#welcomeCont {
     display: flex;
     flex-direction: column;
     background: var(--basicColor);
-    width:90%;
-    height:80%;
+    width: 90%;
+    height: 80%;
     margin: auto;
     margin-top: 8%;
     align-items: center;
     border-radius: 15px;
     box-shadow: 2px 2px 12px 4px darkred;
 }
+
 #logoCont {
     width: 60%;
 }
-#logoCont img{
+
+#logoCont img {
     width: 100%;
     height: 100%;
 }
 
-#toadCont{
+#toadCont {
     width: 30%;
 }
-#toadCont img{
+
+#toadCont img {
     width: 100%;
     height: 100%;
 }
+
 #nextBtn {
     margin-top: 2%;
     margin-bottom: 3%;
@@ -271,7 +302,7 @@
     border-radius: 10px;
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--basicColor)
 }
@@ -282,6 +313,7 @@ a{
     position: relative;
     margin-top: 5%;
 }
+
 #canelita {
     width: 30%;
     position: absolute;
@@ -290,6 +322,7 @@ a{
     top: 100px;
 
 }
+
 #link {
     width: 30%;
     position: absolute;
@@ -297,24 +330,28 @@ a{
     left: 40%;
     top: 110px;
 }
+
 #mario {
     width: 35%;
     position: absolute;
     z-index: 3;
 }
+
 #samus {
     width: 40%;
     position: absolute;
     z-index: 1;
     left: 27%;
 }
+
 #pikachu {
     width: 30%;
     position: absolute;
     z-index: 4;
     left: 70%;
-    top:125px;
+    top: 125px;
 }
+
 #inkling {
     width: 35%;
     position: absolute;
@@ -322,23 +359,27 @@ a{
     left: 55%;
     top: 35px;
 }
+
 /* Login */
 #loginInputCont {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 #contPikachu {
     width: 100%;
     margin: 0;
     display: flex;
     justify-content: center;
 }
+
 .loginBtn {
     text-align: center;
 }
+
 /* ---------------------- dash --------------------------- */
-#dashHeader{
+#dashHeader {
     width: 100%;
     display: flex;
     background: var(--basicColor);
@@ -346,18 +387,22 @@ a{
     align-items: center;
     margin-bottom: 15px;
 }
+
 .dashProfile {
     width: 20%;
     border-radius: 50%;
     margin-left: 10px;
 }
+
 .logoNi {
     width: 20%;
 }
+
 .dots {
     margin-right: 10px;
 }
-#contenedorPost{
+
+#contenedorPost {
     width: 85%;
     height: 150px;
     background: var(--basicColor);
@@ -366,40 +411,46 @@ a{
     padding: 2%;
     margin-bottom: 2%;
 }
-#inputPost{
+
+#inputPost {
     width: 100%;
     height: 75%;
     border: none;
     margin-bottom: 1%;
 }
+
 #bottomPost {
     display: flex;
     justify-content: space-between;
     align-content: center;
 }
+
 #iconos {
     width: 30%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 #postBtn {
     width: 20%;
 }
-#publishPost{
+
+#publishPost {
     background-color: var(--mainBackground);
     border-radius: 10px;
     color: var(--basicColor);
     width: 100%;
     height: 30px;
-    border:none;
+    border: none;
 }
+
 #publishedPost {
     width: 85%;
     background: var(--basicColor);
-    margin:auto;
+    margin: auto;
     border-radius: 20px;
-    margin-top:2%;
+    margin-top: 2%;
 }
 
 #titlePost {
@@ -409,32 +460,38 @@ a{
     padding: 2%;
     border-radius: 20px 20px 0px 0px;
 }
+
 #userInfo {
     width: 70%;
     display: flex;
     align-items: center;
 }
+
 #userInfo p {
     margin: 2%;
     color: var(--basicColor);
     font-size: 18px;
 }
-#postProfilePic{
+
+#postProfilePic {
     width: 20%;
     border-radius: 50%;
 }
-#iconsPost{
+
+#iconsPost {
     display: flex;
-    height:30px; 
+    height: 30px;
     align-self: flex-end;
     width: 30%;
-    gap:5%;
-    justify-content: flex-end;  
+    gap: 5%;
+    justify-content: flex-end;
 }
+
 #textPost {
     padding: 3%;
     font-size: 17px;
 }
+
 #heart {
     display: flex;
     justify-content: flex-end;
@@ -442,9 +499,12 @@ a{
     gap: 1%;
     padding: 2%;
 }
+
 #editPost {
-    display: none;   
+    width: 300px;
+    height: 200px;
 }
+
 #editInput {
     text-align: center;
     margin: 2%;
@@ -454,12 +514,14 @@ a{
     font-size: 16px;
     border-radius: 20px;
 }
-#editBtns{
+
+#editBtns {
     display: flex;
     justify-content: center;
-    gap:2%;
+    gap: 2%;
 }
-.buttonEdit{
+
+.buttonEdit {
     width: 20%;
     height: 100%;
     background: var(--mainBackground);
@@ -468,10 +530,12 @@ a{
     border: none;
     border-radius: 10px;
 }
+
 #publishedPostsCont {
     margin-bottom: 5%;
 }
-#logOutButton{
+
+#logOutButton {
     background-color: var(--mainBackground);
     border-radius: 10px;
     color: var(--basicColor);
@@ -480,170 +544,206 @@ a{
     border: none;
     margin-right: 2%;
 }
+
 /* small tablet styles */
 @media screen and (min-width: 620px) {
-/* home */
-#footerGif {
+
+    /* home */
+    #footerGif {
         margin-top: 5%;
         text-align: center;
     }
 
-/* register any mail */
-#titleRegister {
-    color: var(--basicColor);
-    text-align: center;
-    padding-bottom: 3%;
-    padding-top: 2%;
-    font-size: 25px;
+    /* register any mail */
+    #titleRegister {
+        color: var(--basicColor);
+        text-align: center;
+        padding-bottom: 3%;
+        padding-top: 2%;
+        font-size: 25px;
+    }
+
+    #picCont {
+        width: 50%;
+        height: 35%;
+    }
+
+    .containerPronouns {
+        width: 30%;
+        height: 50px;
+    }
+
+    .checkInputText {
+        font-size: 23px;
+    }
+
+    .submitBtn {
+        width: 30%;
+        height: 100px;
+        top: 150%;
+        right: 35%;
+    }
+
+    #submitBtn {
+        font-size: 25px;
+    }
+
+    /* welcome */
+    .welcomeText {
+        font-size: 40px;
+        color: var(--highlightColor);
+        margin-top: 3%;
+    }
+
+    #logoCont {
+        width: 40%;
+        margin: 0;
+    }
+
+    #toadCont {
+        width: 20%;
+    }
+
+    #welcomeCont {
+        margin-top: 2%;
+    }
+
+    #inkling {
+        top: 80px;
+    }
+
+    #pikachu {
+        top: 200px;
+    }
+
+    #link {
+        top: 230px;
+    }
+
+    #canelita {
+        top: 210px;
+    }
 }
 
-#picCont {
-    width: 50%;
-    height: 35%;
-}
-.containerPronouns {
-    width: 30%;
-    height: 50px;
-}
-.checkInputText{
-    font-size: 23px;
-}
-.submitBtn{
-    width: 30%;
-    height: 100px;
-    top: 150%;
-    right: 35%;
-}
-#submitBtn{
-    font-size: 25px;
-}
-/* welcome */
-.welcomeText {
-    font-size: 40px;
-    color: var(--highlightColor);
-    margin-top: 3%;
-}
-
-#logoCont {
-    width: 40%;
-    margin: 0;
-}
-#toadCont {
-    width: 20%;
-}
-#welcomeCont {
-    margin-top: 2%;
-}
-#inkling {
-    top: 80px;
-}
-#pikachu{
-    top: 200px;
-}
-#link{
-    top:230px;
-}
-#canelita{
-    top: 210px;
-}
-} /* final query */
+/* final query */
 
 /* large tablet & laptop styles */
 @media screen and (min-width: 960px) {
-/* home */
-#footerGif {
+
+    /* home */
+    #footerGif {
         margin-top: 5%;
         text-align: center;
     }
 
-} /* final query */
+}
+
+/* final query */
 
 
 /* desktop styles */
 @media screen and (min-width: 1200px) {
-/* home */
-#logoContHome {
+
+    /* home */
+    #logoContHome {
         text-align: center;
         margin: 0.5%;
     }
-.logoHome {
-        width: 25%;  
-}
-#loginBtnCont{
-        width: 35%;   
+
+    .logoHome {
+        width: 25%;
     }
-#register{
+
+    #loginBtnCont {
+        width: 35%;
+    }
+
+    #register {
         padding-top: 1%;
         padding-bottom: 1%;
         margin: 0.5%;
-}
-#icons {
-    gap: 1.5%;
-    margin: 1%;
-}
-.contIcon {
-    width: 10%;
-    height: 10%;
-    margin-bottom: 0.5%;
-    margin-top: 0;
-} 
-#registerBtnCont {
-    width: 35%;
-    margin: auto;
-}
-#registerBtn {
-    width: 100%;
-    height: 80px;
-    font-size: calc(15px + 1vw);
-    padding: 5px;
-    background: var(--basicColor);
-    border: 0;
-    border-radius: 10px;
-    margin: 2%;
-    transition: all .4s ease-in-out
-}
-#footerGif {
-    margin-top: 2%;
-    margin-bottom: 1%;
-    text-align: center;
+    }
+
+    #icons {
+        gap: 1.5%;
+        margin: 1%;
+    }
+
+    .contIcon {
+        width: 10%;
+        height: 10%;
+        margin-bottom: 0.5%;
+        margin-top: 0;
+    }
+
+    #registerBtnCont {
+        width: 35%;
+        margin: auto;
+    }
+
+    #registerBtn {
+        width: 100%;
+        height: 80px;
+        font-size: calc(15px + 1vw);
+        padding: 5px;
+        background: var(--basicColor);
+        border: 0;
+        border-radius: 10px;
+        margin: 2%;
+        transition: all .4s ease-in-out
+    }
+
+    #footerGif {
+        margin-top: 2%;
+        margin-bottom: 1%;
+        text-align: center;
+    }
+
+    /* register any mail */
+    #picCont {
+        width: 22%;
+        height: 40%;
+    }
+
+    #textInputCont {
+        top: 60%;
+    }
+
+    /* welcome */
+    .welcome {
+        background-image: url("./images/background2.png");
+        width: 100%;
+        height: 100vh;
+        background-size: 100vw;
+        background-repeat: no-repeat;
+    }
+
+    #welcomeCont {
+        width: 50%;
+        margin-top: 3%;
+
+    }
+
+    #toadCont {
+        width: 15%;
+    }
+
+    .welcomeText {
+        font-size: 30px;
+        color: var(--highlightColor);
+        margin-top: 3%;
+    }
+
+    #charaCont {
+        display: none;
+    }
+
+    #nextBtn {
+        margin-top: 50px;
+        height: 80px;
+        margin-bottom: 20px;
+    }
 }
 
-/* register any mail */
-#picCont {
-    width: 22%;
-    height: 40%;
-}
-#textInputCont {
-    top: 60%;
-}
-
-/* welcome */
-.welcome {
-    background-image: url("./images/background2.png");
-    width:100%;
-    height: 100vh;
-    background-size: 100vw;
-    background-repeat: no-repeat;
-}
-#welcomeCont {
-    width: 50%;
-    margin-top: 3%;
-    
-}
-#toadCont{
-    width: 15%;
-}
-.welcomeText {
-    font-size: 30px;
-    color: var(--highlightColor);
-    margin-top: 3%;
-}
-#charaCont {
-  display: none;
-}
-#nextBtn{
-    margin-top: 50px;
-    height: 80px;
-    margin-bottom: 20px;
-}
-} /* final query */
+/* final query */
+/* eslint-enable */
