@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 import { auth } from '../firebase.js';
 
 function identifyUser() {
@@ -7,4 +7,4 @@ function identifyUser() {
 }setTimeout(identifyUser, 500);
 
 export { identifyUser };
-/* eslint-enable */
+

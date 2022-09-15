@@ -1,4 +1,3 @@
-/* eslint-disable */
 // funcion para recoger datos del formulario
 function readURL() {
   const imgDiv = document.getElementById('picCont');
@@ -30,4 +29,4 @@ function readURL() {
 }
 
 export { readURL };
-/* eslint-enable */
+

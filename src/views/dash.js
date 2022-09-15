@@ -1,4 +1,3 @@
-/* eslint-disable */
 // exportar contenido de la pagina.
 export default () => `<header id="dashHeader">
      <img class="dashProfile" src="" alt="Foto de perfil">
@@ -24,4 +23,4 @@ export default () => `<header id="dashHeader">
      <section id="publishedPostsCont"
      </section> 
        `;
-/* eslint-enable */
+

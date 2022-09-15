@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* import functionsHome from "../functions/functionsHome.js"
 
 hay que ejecutar las funciones importadas.
@@ -24,4 +23,4 @@ export default () => `<div id="contHome">
      <div id="footerGif"><img src="./images/nGames.gif" alt="nintendo games"></div>
   </footer>
   </div>`;
-/* eslint-enable */
+

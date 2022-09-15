@@ -1,4 +1,3 @@
-/* eslint-disable */
 // exportar contenido de la pagina.
 export default () => `<div class="welcome">
         <div id="welcomeCont">
@@ -18,4 +17,3 @@ export default () => `<div class="welcome">
         <img id="inkling" src="./images/splatoon.png" alt="inkling">
       </div>
       </div>`;
-/* eslint-enable */

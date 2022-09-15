@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {newUser} from '../src/firebase.js';
 const USERS = [
   {
@@ -28,4 +27,4 @@ describe('newUser', () => {
     expect(error).toBe('auth/weak-password');
   }));
 });
-/* eslint-enable */
+

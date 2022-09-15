@@ -1,4 +1,3 @@
-/* eslint-disable */
 // importar modulos de firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js';
 import {
@@ -296,4 +295,4 @@ function logOut() {
 export {
   newUser, newGoogleUser, logIn, logInGoogle, auth, postData, postDash, logOut, createUserWithEmailAndPassword, deletePost, likes, editPosts,
 };
-/* eslint-enable */
+

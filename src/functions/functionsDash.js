@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { auth } from '../firebase.js';
 
 function printProfilePic() {
@@ -6,4 +5,4 @@ function printProfilePic() {
 }setTimeout(printProfilePic, 500);
 
 export { printProfilePic };
-/* eslint-enable */
+

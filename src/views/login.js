@@ -1,4 +1,3 @@
-/* eslint-disable */
 // exportar contenido de la pagina.
 export default () => `<div id="contHome">
 <header id="logoContHome">
@@ -24,4 +23,4 @@ export default () => `<div id="contHome">
     </div>
     </main>
   </div>`;
-/* eslint-enable */
+
