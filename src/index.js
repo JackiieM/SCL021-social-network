@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { readURL } from './functions/functionsAnyMail.js';
 import { identifyUser } from '../functions/functionsWelcome.js';
 import { printProfilePic } from './functions/functionsDash.js';
@@ -180,4 +179,3 @@ window.addEventListener('click', (e) => {
 window.addEventListener('popstate', router);
 // inicializar en el home
 window.addEventListener('DOMContentLoaded', router);
-/* eslint-enable */
