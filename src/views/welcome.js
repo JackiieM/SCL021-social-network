@@ -1,17 +1,13 @@
-/*import functionsWelcome from "../functions/functionsWelcome.js"
-
-//hay que ejecutar las funciones importadas.
-functionsWelcome();*/
-
-//exportar contenido de la pagina.
-export default () =>
-        `<div class="welcome">
+/* eslint-disable */
+// exportar contenido de la pagina.
+export default () => `<div class="welcome">
         <div id="welcomeCont">
-        <p class="welcomeText">It's a me Nickname!!!</p>
-        <p class="welcomeText">Bienvenid@ a </p>
+        <p class="welcomeText" id="greeting"></p>
+        <p class="welcomeText">Bienvenid@ a Niverse!</p>
         <div id="logoCont"><img src="./images/logo.gif" alt="logo Niverse"></div>
         <div id="toadCont"><img src="./images/toad-baila.gif" alt="toad"></div>
-        <button id="nextBtn">Continuar</button> 
+        <button id="nextBtn"><a href="/dash" data-link>Continuar a mi Dashboard</a></button>
+        <button id="nextBtn"><a href="/registerSetMail" data-link>Editar mi perfil</a></button> 
       </div>
      <div id="charaCont">
         <img id="canelita" src="./images/canelita.png" alt="canelita">
@@ -21,4 +17,5 @@ export default () =>
         <img id="samus" src="./images/metroid.png" alt="samus">
         <img id="inkling" src="./images/splatoon.png" alt="inkling">
       </div>
-      </div>` ;
+      </div>`;
+/* eslint-enable */

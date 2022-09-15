@@ -1,6 +1,6 @@
-//exportar contenido de la pagina.
-export default () =>
-    `<div id="anyMailCont">
+/* eslint-disable */
+// exportar contenido de la pagina.
+export default () => `<div id="anyMailCont">
      <h4 id="titleRegister">Bienvenid@! Completa tus datos para registrarte en Niverse!</h4>
        <form id="formContent" action="">
         <div id="picCont">
@@ -31,6 +31,4 @@ export default () =>
         </div>
        </form>
     </div>`;
-
-
-
+/* eslint-enable */
